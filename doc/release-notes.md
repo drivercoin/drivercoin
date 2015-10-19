@@ -40,16 +40,16 @@ caching. A sample config for apache2 could look like:
     SSLCertificateFile /etc/apache2/ssl/server.crt
     SSLCertificateKeyFile /etc/apache2/ssl/server.key
 
-    <Location /bitcoinrpc>
+    <Location /drivercoinrpc>
         ProxyPass http://127.0.0.1:8332/
         ProxyPassReverse http://127.0.0.1:8332/
         # optional enable digest auth
         # AuthType Digest
         # ...
 
-        # optional bypass bitcoind rpc basic auth
+        # optional bypass drivercoind rpc basic auth
         # RequestHeader set Authorization "Basic <hash>"
-        # get the <hash> from the shell with: base64 <<< bitcoinrpc:<password>
+        # get the <hash> from the shell with: base64 <<< drivercoinrpc:<password>
     </Location>
 
     # Or, balance the load:
@@ -70,7 +70,7 @@ overridden with the option `-rpccookiefile`.
 This is similar to Tor's CookieAuthentication: see
 https://www.torproject.org/docs/tor-manual.html.en
 
-This allows running bitcoind without having to do any manual configuration.
+This allows running drivercoind without having to do any manual configuration.
 
 Low-level RPC API changes
 --------------------------
@@ -92,7 +92,7 @@ other software, the last specified value for an option will hold.
 ------------------------
 
 Support for the `NODE_BLOOM` service bit, as described in [BIP
-111](https://github.com/bitcoin/bips/blob/master/bip-0111.mediawiki), has been
+111](https://github.com/drivercoin/bips/blob/master/bip-0111.mediawiki), has been
 added to the P2P protocol code.
 
 BIP 111 defines a service bit to allow peers to advertise that they support
@@ -147,7 +147,7 @@ and are affected by this change:
 - RPC `decoderawtransaction`
 - REST `/rest/tx/` (JSON format)
 - REST `/rest/block/` (JSON format when including extended tx details)
-- `bitcoin-tx -json`
+- `drivercoin-tx -json`
 
 For example, the `scriptSig.asm` property of a transaction input that
 previously showed an assembly representation of:
@@ -184,7 +184,7 @@ configured specifically to process scriptPubKey and not scriptSig scripts.
 Addition of ZMQ-based Notifcations
 ==================================
 
-Bitcoind can now (optionally) asynchronously notify clients through a
+Drivercoind can now (optionally) asynchronously notify clients through a
 ZMQ-based PUB socket of the arrival of new transactions and blocks.
 This feature requires installation of the ZMQ C API library 4.x and
 configuring its use through the command line or configuration file.

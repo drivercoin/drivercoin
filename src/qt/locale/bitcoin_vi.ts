@@ -49,7 +49,7 @@
     <name>AskPassphraseDialog</name>
     </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>DrivercoinGUI</name>
     </context>
 <context>
     <name>ClientModel</name>
@@ -205,6 +205,6 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>drivercoin-core</name>
     </context>
 </TS>

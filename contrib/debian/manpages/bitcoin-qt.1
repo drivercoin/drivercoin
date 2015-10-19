@@ -1,20 +1,20 @@
-.TH BITCOIN-QT "1" "April 2013" "bitcoin-qt 1"
+.TH BITCOIN-QT "1" "April 2013" "drivercoin-qt 1"
 .SH NAME
-bitcoin-qt \- peer-to-peer network based digital currency
+drivercoin-qt \- peer-to-peer network based digital currency
 .SH DESCRIPTION
 .SS "Usage:"
 .IP
-bitcoin\-qt [command\-line options]
+drivercoin\-qt [command\-line options]
 .SH OPTIONS
 .TP
 \-?
 This help message
 .TP
 \fB\-conf=\fR<file>
-Specify configuration file (default: bitcoin.conf)
+Specify configuration file (default: drivercoin.conf)
 .TP
 \fB\-pid=\fR<file>
-Specify pid file (default: bitcoind.pid)
+Specify pid file (default: drivercoind.pid)
 .TP
 \fB\-gen\fR
 Generate coins
@@ -41,7 +41,7 @@ Use proxy to reach tor hidden services (default: same as \fB\-proxy\fR)
 Allow DNS lookups for \fB\-addnode\fR, \fB\-seednode\fR and \fB\-connect\fR
 .TP
 \fB\-port=\fR<port>
-Listen for connections on <port> (default: 8333 or testnet: 18333)
+Listen for connections on <port> (default: 56790 or testnet: 56788)
 .TP
 \fB\-maxconnections=\fR<n>
 Maintain at most <n> connections to peers (default: 125)
@@ -122,7 +122,7 @@ Username for JSON\-RPC connections
 Password for JSON\-RPC connections
 .TP
 \fB\-rpcport=\fR<port>
-Listen for JSON\-RPC connections on <port> (default: 8332 or testnet: 18332)
+Listen for JSON\-RPC connections on <port> (default: 56789 or testnet: 56787)
 .TP
 \fB\-rpcallowip=\fR<ip>
 Allow JSON\-RPC connections from specified IP address

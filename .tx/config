@@ -1,0 +1,7 @@
+[main]
+host = https://www.transifex.com
+
+[drivercoin.qt-translation-011x]
+file_filter = src/qt/locale/drivercoin_<lang>.ts
+source_file = src/qt/locale/drivercoin_en.ts
+source_lang = en

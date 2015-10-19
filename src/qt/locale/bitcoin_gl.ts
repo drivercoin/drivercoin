@@ -62,12 +62,12 @@
         <translation>Direccións para recibir</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Estas son as túas direccións Bitcoin para enviar pagos. Revisa sempre a cantidade e a dirección receptora antes de enviar moedas.</translation>
+        <source>These are your Drivercoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Estas son as túas direccións Drivercoin para enviar pagos. Revisa sempre a cantidade e a dirección receptora antes de enviar moedas.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Estas son as túas direccións Bitcoin para recibir pagos. Recoméndase empregar unha nova dirección de recepción por cada transacción.</translation>
+        <source>These are your Drivercoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Estas son as túas direccións Drivercoin para recibir pagos. Recoméndase empregar unha nova dirección de recepción por cada transacción.</translation>
     </message>
     <message>
         <source>Copy &amp;Label</source>
@@ -201,7 +201,7 @@
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>DrivercoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>&amp;Asinar mensaxe...</translation>
@@ -267,8 +267,8 @@
         <translation>Reindexando bloques no disco...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>Enviar moedas a unha dirección Bitcoin</translation>
+        <source>Send coins to a Drivercoin address</source>
+        <translation>Enviar moedas a unha dirección Drivercoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -291,8 +291,8 @@
         <translation>&amp;Verificar mensaxe...</translation>
     </message>
     <message>
-        <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
+        <source>Drivercoin</source>
+        <translation>Drivercoin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -319,12 +319,12 @@
         <translation>Encriptar as claves privadas que pertencen ao teu moedeiro</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Asina mensaxes coas túas direccións Bitcoin para probar que te pertencen</translation>
+        <source>Sign messages with your Drivercoin addresses to prove you own them</source>
+        <translation>Asina mensaxes coas túas direccións Drivercoin para probar que te pertencen</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Verificar mensaxes para asegurar que foron asinados con direccións Bitcoin dadas.</translation>
+        <source>Verify messages to ensure they were signed with specified Drivercoin addresses</source>
+        <translation>Verificar mensaxes para asegurar que foron asinados con direccións Drivercoin dadas.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -343,16 +343,16 @@
         <translation>Barra de ferramentas</translation>
     </message>
     <message>
-        <source>Bitcoin Core</source>
-        <translation>Core de Bitcoin</translation>
+        <source>Drivercoin Core</source>
+        <translation>Core de Drivercoin</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>Solicitar pagos (xenera códigos QR e bitcoin: URIs)</translation>
+        <source>Request payments (generates QR codes and drivercoin: URIs)</source>
+        <translation>Solicitar pagos (xenera códigos QR e drivercoin: URIs)</translation>
     </message>
     <message>
-        <source>&amp;About Bitcoin Core</source>
-        <translation>&amp;Sobre Bitcoin Core</translation>
+        <source>&amp;About Drivercoin Core</source>
+        <translation>&amp;Sobre Drivercoin Core</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -363,8 +363,8 @@
         <translation>Amosar a listaxe de etiquetas e direccións para recibir empregadas</translation>
     </message>
     <message>
-        <source>Open a bitcoin: URI or payment request</source>
-        <translation>Abrir un bitcoin: URI ou solicitude de pago</translation>
+        <source>Open a drivercoin: URI or payment request</source>
+        <translation>Abrir un drivercoin: URI ou solicitude de pago</translation>
     </message>
     <message>
         <source>No block source available...</source>
@@ -632,8 +632,8 @@
         <translation>A dirección introducida "%1" xa está no libro de direccións.</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation>A dirección introducida '%1' non é unha dirección Bitcoin válida.</translation>
+        <source>The entered address "%1" is not a valid Drivercoin address.</source>
+        <translation>A dirección introducida '%1' non é unha dirección Drivercoin válida.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -670,16 +670,16 @@
 <context>
     <name>HelpMessageDialog</name>
     <message>
-        <source>Bitcoin Core</source>
-        <translation>Core de Bitcoin</translation>
+        <source>Drivercoin Core</source>
+        <translation>Core de Drivercoin</translation>
     </message>
     <message>
         <source>version</source>
         <translation>versión</translation>
     </message>
     <message>
-        <source>About Bitcoin Core</source>
-        <translation>Sobre Bitcoin core</translation>
+        <source>About Drivercoin Core</source>
+        <translation>Sobre Drivercoin core</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -709,8 +709,8 @@
         <translation>Empregar un directorio de datos personalizado</translation>
     </message>
     <message>
-        <source>Bitcoin Core</source>
-        <translation>Core de Bitcoin</translation>
+        <source>Drivercoin Core</source>
+        <translation>Core de Drivercoin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -763,8 +763,8 @@
         <translation>&amp;Rede</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Abrir automáticamente o porto do cliente Bitcoin no router. Esto so funciona se o teu router soporta UPnP e está habilitado.</translation>
+        <source>Automatically open the Drivercoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Abrir automáticamente o porto do cliente Drivercoin no router. Esto so funciona se o teu router soporta UPnP e está habilitado.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -842,8 +842,8 @@
         <translation>Formulario</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>A información amosada por estar desactualizada. O teu moedeiro sincronízase automáticamente coa rede Bitcoin despois de que se estableza unha conexión, pero este proceso non está todavía rematado.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Drivercoin network after a connection is established, but this process has not completed yet.</source>
+        <translation>A información amosada por estar desactualizada. O teu moedeiro sincronízase automáticamente coa rede Drivercoin despois de que se estableza unha conexión, pero este proceso non está todavía rematado.</translation>
     </message>
     <message>
         <source>Your current spendable balance</source>
@@ -1285,8 +1285,8 @@
         <translation>O total sobrepasa o teu balance cando se inclúe a tarifa de transacción %1.</translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin address</source>
-        <translation>Atención:  Enderezo Bitcoin non válido</translation>
+        <source>Warning: Invalid Drivercoin address</source>
+        <translation>Atención:  Enderezo Drivercoin non válido</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -1402,8 +1402,8 @@
         <translation>Copiar a sinatura actual ao portapapeis do sistema</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin address</source>
-        <translation>Asina a mensaxe para probar que posees esta dirección Bitcoin</translation>
+        <source>Sign the message to prove you own this Drivercoin address</source>
+        <translation>Asina a mensaxe para probar que posees esta dirección Drivercoin</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -1422,8 +1422,8 @@
         <translation>&amp;Verificar Mensaxe</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
-        <translation>Verificar a mensaxe para asegurar que foi asinada coa dirección Bitcoin especificada</translation>
+        <source>Verify the message to ensure it was signed with the specified Drivercoin address</source>
+        <translation>Verificar a mensaxe para asegurar que foi asinada coa dirección Drivercoin especificada</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -1489,12 +1489,12 @@
 <context>
     <name>SplashScreen</name>
     <message>
-        <source>Bitcoin Core</source>
-        <translation>Core de Bitcoin</translation>
+        <source>Drivercoin Core</source>
+        <translation>Core de Drivercoin</translation>
     </message>
     <message>
-        <source>The Bitcoin Core developers</source>
-        <translation>Os desarrolladores de Bitcoin Core</translation>
+        <source>The Drivercoin Core developers</source>
+        <translation>Os desarrolladores de Drivercoin Core</translation>
     </message>
     <message>
         <source>[testnet]</source>
@@ -1905,7 +1905,7 @@
     </message>
 </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>drivercoin-core</name>
     <message>
         <source>Options:</source>
         <translation>Opcións:</translation>

@@ -133,7 +133,7 @@
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>DrivercoinGUI</name>
     <message>
         <source>Synchronizing with network...</source>
         <translation>Синхронизација са мрежом у току...</translation>
@@ -187,8 +187,8 @@
         <translation>Промени &amp;лозинку...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>Пошаљите новац на bitcoin адресу</translation>
+        <source>Send coins to a Drivercoin address</source>
+        <translation>Пошаљите новац на drivercoin адресу</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
@@ -314,8 +314,8 @@
         <translation>верзија</translation>
     </message>
     <message>
-        <source>About Bitcoin Core</source>
-        <translation>O Bitcoin Coru</translation>
+        <source>About Drivercoin Core</source>
+        <translation>O Drivercoin Coru</translation>
     </message>
     <message>
         <source>Usage:</source>
@@ -733,7 +733,7 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>drivercoin-core</name>
     <message>
         <source>Options:</source>
         <translation>Opcije</translation>

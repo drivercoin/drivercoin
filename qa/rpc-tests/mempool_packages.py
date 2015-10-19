@@ -1,17 +1,17 @@
 #!/usr/bin/env python2
-# Copyright (c) 2014-2015 The Bitcoin Core developers
+# Copyright (c) 2014-2015 The Drivercoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 # Test descendant package tracking code
 
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import DrivercoinTestFramework
 from test_framework.util import *
 
 def satoshi_round(amount):
     return  Decimal(amount).quantize(Decimal('0.00000001'), rounding=ROUND_DOWN)
 
-class MempoolPackagesTest(BitcoinTestFramework):
+class MempoolPackagesTest(DrivercoinTestFramework):
 
     def setup_network(self):
         self.nodes = []

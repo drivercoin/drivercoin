@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-# Copyright (c) 2014 The Bitcoin Core developers
+# Copyright (c) 2014 The Drivercoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -36,8 +36,8 @@ for i in range(1,len(sys.argv)):
 
 #Set env vars
 buildDir = BUILDDIR
-os.environ["BITCOIND"] = buildDir + '/src/bitcoind' + EXEEXT
-os.environ["BITCOINCLI"] = buildDir + '/src/bitcoin-cli' + EXEEXT
+os.environ["BITCOIND"] = buildDir + '/src/drivercoind' + EXEEXT
+os.environ["BITCOINCLI"] = buildDir + '/src/drivercoin-cli' + EXEEXT
 
 #Disable Windows tests by default
 if EXEEXT == ".exe" and "-win" not in opts:
@@ -115,4 +115,4 @@ if(ENABLE_WALLET == 1 and ENABLE_UTILS == 1 and ENABLE_BITCOIND == 1):
             print  "Running 2nd level testscript " + testScriptsExt[i] + "..."
             subprocess.call(rpcTestDir + testScriptsExt[i] + " --srcdir " + buildDir + '/src ' + passOn,shell=True)
 else:
-    print "No rpc tests to run. Wallet, utils, and bitcoind must all be enabled"
+    print "No rpc tests to run. Wallet, utils, and drivercoind must all be enabled"

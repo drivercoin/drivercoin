@@ -1,7 +1,7 @@
 Release Process
 ====================
 
-* Update translations (ping wumpus, Diapolo or tcatm on IRC) see [translation_process.md](https://github.com/bitcoin/bitcoin/blob/master/doc/translation_process.md#syncing-with-transifex)
+* Update translations (ping wumpus, Diapolo or tcatm on IRC) see [translation_process.md](https://github.com/drivercoin/drivercoin/blob/master/doc/translation_process.md#syncing-with-transifex)
 * Update [bips.md](bips.md) to account for changes since the last release.
 
 * * *
@@ -10,14 +10,14 @@ Release Process
 Check out the source code in the following directory hierarchy.
 
 	cd /path/to/your/toplevel/build
-	git clone https://github.com/bitcoin/gitian.sigs.git
-	git clone https://github.com/bitcoin/bitcoin-detached-sigs.git
+	git clone https://github.com/drivercoin/gitian.sigs.git
+	git clone https://github.com/drivercoin/drivercoin-detached-sigs.git
 	git clone https://github.com/devrandom/gitian-builder.git
-	git clone https://github.com/bitcoin/bitcoin.git
+	git clone https://github.com/drivercoin/drivercoin.git
 
-###Bitcoin maintainers/release engineers, update (commit) version in sources
+###Drivercoin maintainers/release engineers, update (commit) version in sources
 
-	pushd ./bitcoin
+	pushd ./drivercoin
 	contrib/verifysfbinaries/verify.sh
 	doc/README*
 	share/setup.nsi
@@ -38,7 +38,7 @@ Check out the source code in the following directory hierarchy.
 
  Setup gitian descriptors:
   
-	pushd ./bitcoin
+	pushd ./drivercoin
 	export SIGNER=(your gitian key, ie bluematt, sipa, etc)
 	export VERSION=(new version, e.g. 0.8.0)
 	git checkout v${VERSION}
@@ -58,7 +58,7 @@ Check out the source code in the following directory hierarchy.
 ###Fetch and create inputs: (first time, or when dependency versions change)
  
 	mkdir -p inputs
-	wget -P inputs https://bitcoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
+	wget -P inputs https://drivercoincore.org/cfields/osslsigncode-Backports-to-1.7.1.patch
 	wget -P inputs http://downloads.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz
 
  Register and download the Apple SDK: see [OSX readme](README_osx.txt) for details.
@@ -73,42 +73,42 @@ Check out the source code in the following directory hierarchy.
 
 By default, gitian will fetch source files as needed. To cache them ahead of time:
 
-	make -C ../bitcoin/depends download SOURCES_PATH=`pwd`/cache/common
+	make -C ../drivercoin/depends download SOURCES_PATH=`pwd`/cache/common
 
 Only missing files will be fetched, so this is safe to re-run for each build.
 
 NOTE: Offline builds must use the --url flag to ensure gitian fetches only from local URLs. For example: 
 ```
-./bin/bguild --url bitcoin=/path/to/bitcoin,signature=/path/to/sigs {rest of arguments}
+./bin/bguild --url drivercoin=/path/to/drivercoin,signature=/path/to/sigs {rest of arguments}
 ```
 The gbuild invocations below <b>DO NOT DO THIS</b> by default.
 
-###Build (and optionally verify) Bitcoin Core for Linux, Windows, and OS X:
+###Build (and optionally verify) Drivercoin Core for Linux, Windows, and OS X:
   
-	./bin/gbuild --commit bitcoin=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-linux.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-linux.yml
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../bitcoin/contrib/gitian-descriptors/gitian-linux.yml
-	mv build/out/bitcoin-*.tar.gz build/out/src/bitcoin-*.tar.gz ../
+	./bin/gbuild --commit drivercoin=v${VERSION} ../drivercoin/contrib/gitian-descriptors/gitian-linux.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../drivercoin/contrib/gitian-descriptors/gitian-linux.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../drivercoin/contrib/gitian-descriptors/gitian-linux.yml
+	mv build/out/drivercoin-*.tar.gz build/out/src/drivercoin-*.tar.gz ../
 
-	./bin/gbuild --commit bitcoin=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-win.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-win.yml
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../bitcoin/contrib/gitian-descriptors/gitian-win.yml
-	mv build/out/bitcoin-*-win-unsigned.tar.gz inputs/bitcoin-win-unsigned.tar.gz
-	mv build/out/bitcoin-*.zip build/out/bitcoin-*.exe ../
+	./bin/gbuild --commit drivercoin=v${VERSION} ../drivercoin/contrib/gitian-descriptors/gitian-win.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../drivercoin/contrib/gitian-descriptors/gitian-win.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../drivercoin/contrib/gitian-descriptors/gitian-win.yml
+	mv build/out/drivercoin-*-win-unsigned.tar.gz inputs/drivercoin-win-unsigned.tar.gz
+	mv build/out/drivercoin-*.zip build/out/drivercoin-*.exe ../
 
-	./bin/gbuild --commit bitcoin=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-osx.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-osx.yml
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../bitcoin/contrib/gitian-descriptors/gitian-osx.yml
-	mv build/out/bitcoin-*-osx-unsigned.tar.gz inputs/bitcoin-osx-unsigned.tar.gz
-	mv build/out/bitcoin-*.tar.gz build/out/bitcoin-*.dmg ../
+	./bin/gbuild --commit drivercoin=v${VERSION} ../drivercoin/contrib/gitian-descriptors/gitian-osx.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../drivercoin/contrib/gitian-descriptors/gitian-osx.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../drivercoin/contrib/gitian-descriptors/gitian-osx.yml
+	mv build/out/drivercoin-*-osx-unsigned.tar.gz inputs/drivercoin-osx-unsigned.tar.gz
+	mv build/out/drivercoin-*.tar.gz build/out/drivercoin-*.dmg ../
 	popd
 
   Build output expected:
 
-  1. source tarball (bitcoin-${VERSION}.tar.gz)
-  2. linux 32-bit and 64-bit dist tarballs (bitcoin-${VERSION}-linux[32|64].tar.gz)
-  3. windows 32-bit and 64-bit unsigned installers and dist zips (bitcoin-${VERSION}-win[32|64]-setup-unsigned.exe, bitcoin-${VERSION}-win[32|64].zip)
-  4. OSX unsigned installer and dist tarball (bitcoin-${VERSION}-osx-unsigned.dmg, bitcoin-${VERSION}-osx64.tar.gz)
+  1. source tarball (drivercoin-${VERSION}.tar.gz)
+  2. linux 32-bit and 64-bit dist tarballs (drivercoin-${VERSION}-linux[32|64].tar.gz)
+  3. windows 32-bit and 64-bit unsigned installers and dist zips (drivercoin-${VERSION}-win[32|64]-setup-unsigned.exe, drivercoin-${VERSION}-win[32|64].zip)
+  4. OSX unsigned installer and dist tarball (drivercoin-${VERSION}-osx-unsigned.dmg, drivercoin-${VERSION}-osx64.tar.gz)
   5. Gitian signatures (in gitian.sigs/${VERSION}-<linux|{win,osx}-unsigned>/(your gitian key)/
 
 ###Next steps:
@@ -126,25 +126,25 @@ Commit your signature to gitian.sigs:
   Wait for Windows/OSX detached signatures:
 
 	Once the Windows/OSX builds each have 3 matching signatures, they will be signed with their respective release keys.
-	Detached signatures will then be committed to the [bitcoin-detached-sigs](https://github.com/bitcoin/bitcoin-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
+	Detached signatures will then be committed to the [drivercoin-detached-sigs](https://github.com/drivercoin/drivercoin-detached-sigs) repository, which can be combined with the unsigned apps to create signed binaries.
 
   Create (and optionally verify) the signed OSX binary:
 
 	pushd ./gitian-builder
-	./bin/gbuild -i --commit signature=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../bitcoin/contrib/gitian-descriptors/gitian-osx-signer.yml
-	mv build/out/bitcoin-osx-signed.dmg ../bitcoin-${VERSION}-osx.dmg
+	./bin/gbuild -i --commit signature=v${VERSION} ../drivercoin/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../drivercoin/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../drivercoin/contrib/gitian-descriptors/gitian-osx-signer.yml
+	mv build/out/drivercoin-osx-signed.dmg ../drivercoin-${VERSION}-osx.dmg
 	popd
 
   Create (and optionally verify) the signed Windows binaries:
 
 	pushd ./gitian-builder
-	./bin/gbuild -i --commit signature=v${VERSION} ../bitcoin/contrib/gitian-descriptors/gitian-win-signer.yml
-	./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../bitcoin/contrib/gitian-descriptors/gitian-win-signer.yml
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../bitcoin/contrib/gitian-descriptors/gitian-win-signer.yml
-	mv build/out/bitcoin-*win64-setup.exe ../bitcoin-${VERSION}-win64-setup.exe
-	mv build/out/bitcoin-*win32-setup.exe ../bitcoin-${VERSION}-win32-setup.exe
+	./bin/gbuild -i --commit signature=v${VERSION} ../drivercoin/contrib/gitian-descriptors/gitian-win-signer.yml
+	./bin/gsign --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../drivercoin/contrib/gitian-descriptors/gitian-win-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-signed ../drivercoin/contrib/gitian-descriptors/gitian-win-signer.yml
+	mv build/out/drivercoin-*win64-setup.exe ../drivercoin-${VERSION}-win64-setup.exe
+	mv build/out/drivercoin-*win32-setup.exe ../drivercoin-${VERSION}-win32-setup.exe
 	popd
 
 Commit your signature for the signed OSX/Windows binaries:
@@ -169,35 +169,35 @@ rm SHA256SUMS
 (the digest algorithm is forced to sha256 to avoid confusion of the `Hash:` header that GPG adds with the SHA256 used for the files)
 Note: check that SHA256SUMS itself doesn't end up in SHA256SUMS, which is a spurious/nonsensical entry.
 
-- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the bitcoin.org server
-  into `/var/www/bin/bitcoin-core-${VERSION}`
+- Upload zips and installers, as well as `SHA256SUMS.asc` from last step, to the drivercoin.org server
+  into `/var/www/bin/drivercoin-core-${VERSION}`
 
-- Update bitcoin.org version
+- Update drivercoin.org version
 
-  - First, check to see if the Bitcoin.org maintainers have prepared a
-    release: https://github.com/bitcoin-dot-org/bitcoin.org/labels/Releases
+  - First, check to see if the Drivercoin.org maintainers have prepared a
+    release: https://github.com/drivercoin-dot-org/drivercoin.org/labels/Releases
 
       - If they have, it will have previously failed their Travis CI
         checks because the final release files weren't uploaded.
         Trigger a Travis CI rebuild---if it passes, merge.
 
-  - If they have not prepared a release, follow the Bitcoin.org release
-    instructions: https://github.com/bitcoin-dot-org/bitcoin.org#release-notes
+  - If they have not prepared a release, follow the Drivercoin.org release
+    instructions: https://github.com/drivercoin-dot-org/drivercoin.org#release-notes
 
   - After the pull request is merged, the website will automatically show the newest version within 15 minutes, as well
     as update the OS download links. Ping @saivann/@harding (saivann/harding on Freenode) in case anything goes wrong
 
 - Announce the release:
 
-  - Release sticky on bitcointalk: https://bitcointalk.org/index.php?board=1.0
+  - Release sticky on drivercointalk: https://drivercointalk.org/index.php?board=1.0
 
-  - Bitcoin-development mailing list
+  - Drivercoin-development mailing list
 
-  - Update title of #bitcoin on Freenode IRC
+  - Update title of #drivercoin on Freenode IRC
 
-  - Optionally reddit /r/Bitcoin, ... but this will usually sort out itself
+  - Optionally reddit /r/Drivercoin, ... but this will usually sort out itself
 
-- Notify BlueMatt so that he can start building [https://launchpad.net/~bitcoin/+archive/ubuntu/bitcoin](the PPAs)
+- Notify BlueMatt so that he can start building [https://launchpad.net/~drivercoin/+archive/ubuntu/drivercoin](the PPAs)
 
 - Add release notes for the new version to the directory `doc/release-notes` in git master
 

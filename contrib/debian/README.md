@@ -1,21 +1,21 @@
 
 Debian
 ====================
-This directory contains files used to package bitcoind/bitcoin-qt
-for Debian-based Linux systems. If you compile bitcoind/bitcoin-qt yourself, there are some useful files here.
+This directory contains files used to package drivercoind/drivercoin-qt
+for Debian-based Linux systems. If you compile drivercoind/drivercoin-qt yourself, there are some useful files here.
 
-## bitcoin: URI support ##
+## drivercoin: URI support ##
 
 
-bitcoin-qt.desktop  (Gnome / Open Desktop)
+drivercoin-qt.desktop  (Gnome / Open Desktop)
 To install:
 
-	sudo desktop-file-install bitcoin-qt.desktop
+	sudo desktop-file-install drivercoin-qt.desktop
 	sudo update-desktop-database
 
 If you build yourself, you will either need to modify the paths in
-the .desktop file or copy or symlink your bitcoin-qt binary to `/usr/bin`
-and the `../../share/pixmaps/bitcoin128.png` to `/usr/share/pixmaps`
+the .desktop file or copy or symlink your drivercoin-qt binary to `/usr/bin`
+and the `../../share/pixmaps/drivercoin128.png` to `/usr/share/pixmaps`
 
-bitcoin-qt.protocol (KDE)
+drivercoin-qt.protocol (KDE)
 

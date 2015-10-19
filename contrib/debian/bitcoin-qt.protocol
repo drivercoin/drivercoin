@@ -1,6 +1,6 @@
 [Protocol]
-exec=bitcoin-qt '%u'
-protocol=bitcoin
+exec=drivercoin-qt '%u'
+protocol=drivercoin
 input=none
 output=none
 helper=true

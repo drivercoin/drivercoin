@@ -1,15 +1,15 @@
 [Unit]
-Description=Bitcoin's distributed currency daemon
+Description=Drivercoin's distributed currency daemon
 After=network.target
 
 [Service]
-User=bitcoin
-Group=bitcoin
+User=drivercoin
+Group=drivercoin
 
 Type=forking
-PIDFile=/var/lib/bitcoind/bitcoind.pid
-ExecStart=/usr/bin/bitcoind -daemon -pid=/var/lib/bitcoind/bitcoind.pid \
--conf=/etc/bitcoin/bitcoin.conf -datadir=/var/lib/bitcoind -disablewallet
+PIDFile=/var/lib/drivercoind/drivercoind.pid
+ExecStart=/usr/bin/drivercoind -daemon -pid=/var/lib/drivercoind/drivercoind.pid \
+-conf=/etc/drivercoin/drivercoin.conf -datadir=/var/lib/drivercoind -disablewallet
 
 Restart=always
 PrivateTmp=true

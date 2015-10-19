@@ -1,460 +1,663 @@
-// Copyright (c) 2009-2014 The Bitcoin Core developers
-// Distributed under the MIT software license, see the accompanying
-// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-//
-// Data for paymentservertests.cpp
-//
 
-// Base64/DER-encoded fake certificate authority certificates.
-// Convert pem to base64/der with:
-// openssl x509 -in cert.pem -inform PEM -outform DER | openssl enc -base64
 
-// Serial Number: 10302349811211485352 (0x8ef94c91b112c0a8)
-// Issuer: CN=PaymentRequest Test CA
-// Subject: CN=PaymentRequest Test CA
-// Not Valid After : Dec  8 16:37:24 2022 GMT
-//
-const char* caCert1_BASE64 =
-"\
-MIIB0DCCATmgAwIBAgIJAI75TJGxEsCoMA0GCSqGSIb3DQEBCwUAMCExHzAdBgNV\
-BAMTFlBheW1lbnRSZXF1ZXN0IFRlc3QgQ0EwHhcNMTIxMjEwMTYzNzI0WhcNMjIx\
-MjA4MTYzNzI0WjAhMR8wHQYDVQQDExZQYXltZW50UmVxdWVzdCBUZXN0IENBMIGf\
-MA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCvua59nX9radoqDYyplcns5qdVDTN1\
-7tmcGixmMYOYU3UYMU55VSsJs0dWKnMm3COQDY+N63c0XSbRqarBcsLTkaNASuPX\
-FCv1VWuEKSyy5xe4zeoDU7CVSzlxtQD9wbZW/s3ISjgaXBpwn6eVmntb0JwYxxPc\
-M1u/hrMD8BDbSQIDAQABoxAwDjAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUA\
-A4GBADSaRgK5xe47XxycXBhHhr0Wgl4pAsFsufqA9aB9r8KNEHJ0yUvvbD/jaJJM\
-RtQcf0AJ9olzUMY4syehxbzUJP6aeXhZEYiMvdvcv9D55clq6+WLLlNT3jBgAaVn\
-p3waRjPD4bUX3nv+ojz5s4puw7Qq5QUZlhGsMzPvwDGCmZkL\
-";
+<!DOCTYPE html>
+<html lang="en" class="">
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=1020">
+    
+    
+    <title>drivercoin/paymentservertests.h at master · drivercoin/drivercoin · GitHub</title>
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
+    <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-144.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144.png">
+    <meta property="fb:app_id" content="1401488693436528">
 
-// Serial Number: f0:da:97:e4:38:d7:64:16
-// Issuer: CN=PaymentRequest Test CA
-// Subject: CN=PaymentRequest Test CA
-// Not Valid After : Jan  8 18:21:06 2025 GMT
-//
-const char* caCert2_BASE64 =
-"\
-MIIC1TCCAb2gAwIBAgIJAPDal+Q412QWMA0GCSqGSIb3DQEBCwUAMCExHzAdBgNV\
-BAMMFlBheW1lbnRSZXF1ZXN0IFRlc3QgQ0EwHhcNMTUwMTExMTgyMTA2WhcNMjUw\
-MTA4MTgyMTA2WjAhMR8wHQYDVQQDDBZQYXltZW50UmVxdWVzdCBUZXN0IENBMIIB\
-IjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1S9wVLfTplJuT/1OaaBgl/Mb\
-I392v8S9kHbzYz7B4OTMslaO7piz0v3SO3TKMh0dswjiRdHrIgpO7XdIUQiU/ugg\
-xDw0kuNehfz1ycaGedlFFtFHTNXqLyIUF3dlwHhQwaomM6RXoJmxLny5BhYHEcmk\
-yWwr3Cdjd9gAZpblugVJB9C1e40uyL8ao4PHdLzOqO27iSe6riP8SwwisJZEbMaz\
-AZpgNEEMbIXPJEFvm5HTRXSMtQCOTSZYMFF0M2yrtmlECnz7hWP19b9bcoDzZQB4\
-ylIsFG/7q2jV7MC/e2STZv+niJiHL08RUdoFpAgzaxMgqj63C7B55HgNDNHJYQID\
-AQABoxAwDjAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4IBAQBGejPxLxj9\
-+crv6gUeEBMZPiUx7pUgcI22Wm5yymP96B4fwI3Y0DBehq20d76vbWGPN17Z6pH3\
-ge7PVY1SYqXtS6hXTo4olCm/BZADli+2Bs2xCiaa+Ltve4ufVej+bKJXN/YnrhvO\
-Kq+klQkuuHywU+GJV/NQeBqToIrSOBgi477NgLFCCCmmx2QWsxHoCFGfuRCBVseT\
-z2k/tMuALCDXGeZBRPTsGHu1y4cj84swAeoDK5QSQcI+Ub7GKc+zkoj02sdDLiMo\
-3wokYPcIy47oclhmb4xubHc+y7nF610yZBoC/zgbhbawnZ65hDDWkdQ/SVAnWZD7\
-9PFfmNnYPTQH\
-";
+      <meta content="@github" name="twitter:site" /><meta content="summary" name="twitter:card" /><meta content="drivercoin/drivercoin" name="twitter:title" /><meta content="drivercoin - Cryptocurrency Coin - Driver Coin" name="twitter:description" /><meta content="https://avatars2.githubusercontent.com/u/15161107?v=3&amp;s=400" name="twitter:image:src" />
+      <meta content="GitHub" property="og:site_name" /><meta content="object" property="og:type" /><meta content="https://avatars2.githubusercontent.com/u/15161107?v=3&amp;s=400" property="og:image" /><meta content="drivercoin/drivercoin" property="og:title" /><meta content="https://github.com/drivercoin/drivercoin" property="og:url" /><meta content="drivercoin - Cryptocurrency Coin - Driver Coin" property="og:description" />
+      <meta name="browser-stats-url" content="https://api.github.com/_private/browser/stats">
+    <meta name="browser-errors-url" content="https://api.github.com/_private/browser/errors">
+    <link rel="assets" href="https://assets-cdn.github.com/">
+    
+    <meta name="pjax-timeout" content="1000">
+    
 
-//
-// This payment request validates directly against the
-// caCert1 certificate authority.
-//
-const char* paymentrequest1_cert1_BASE64 =
-"\
-Egt4NTA5K3NoYTI1NhrxAwruAzCCAeowggFToAMCAQICAQEwDQYJKoZIhvcNAQEL\
-BQAwITEfMB0GA1UEAxMWUGF5bWVudFJlcXVlc3QgVGVzdCBDQTAeFw0xMjEyMTAx\
-NjM3MjRaFw0yMjEyMDgxNjM3MjRaMEMxGTAXBgNVBAMMEHRlc3RtZXJjaGFudC5v\
-cmcxJjAkBgNVBAoMHVBheW1lbnQgUmVxdWVzdCBUZXN0IE1lcmNoYW50MIGfMA0G\
-CSqGSIb3DQEBAQUAA4GNADCBiQKBgQDHkMy8W1u6HsWlSqdWTmMKf54gICxNfxbY\
-+rcMtAftr62hCYx2d2QiSRd1pCUzmo12IiSX3WxSHwaTnT3MFD6jRx6+zM6XdGar\
-I2zpYle11ANzu4gAthN17uRQHV2O5QxVtzNaMdKeJLXT2L9tfEdyL++9ZUqoQmdA\
-YG9ix330hQIDAQABoxAwDjAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4GB\
-AIkyO99KC68bi9PFRyQQ7nvn5GlQEb3Ca1bRG5+AKN9N5vc8rZ9G2hejtM8wEXni\
-eGBP+chVMsbTPEHKLrwREn7IvcyCcbAStaklPC3w0B/2idQSHskb6P3X13OR2bTH\
-a2+6wuhsOZRUrVNr24rM95DKx/eCC6JN1VW+qRPU6fqzIjQSHwiw2wYSGXapFJVg\
-igPI+6XpExtNLO/i1WFV8ZmoiKwYsuHFiwUqC1VuaXRUZXN0T25lKoABS0j59iMU\
-Uc9MdIfwsO1BskIET0eJSGNZ7eXb9N62u+qf831PMpEHkmlGpk8rHy92nPcgua/U\
-Yt8oZMn3QaTZ5A6HjJbc3A73eLylp1a0SwCl+KDMEvDQhqMn1jAVu2v92AH3uB7n\
-SiWVbw0tX/68iSQEGGfh9n6ee/8Myb3ICdw=\
-";
+    <meta name="msapplication-TileImage" content="/windows-tile.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="selected-link" value="repo_source" data-pjax-transient>
 
-//
-// Signed, but expired, merchant cert in the request
-//
-const char* paymentrequest2_cert1_BASE64 =
-"\
-Egt4NTA5K3NoYTI1NhrsAwrpAzCCAeUwggFOoAMCAQICAQMwDQYJKoZIhvcNAQEL\
-BQAwITEfMB0GA1UEAxMWUGF5bWVudFJlcXVlc3QgVGVzdCBDQTAeFw0xMzAyMjMy\
-MTI2NDNaFw0xMzAyMjQyMTI2NDNaMD4xHDAaBgNVBAMME2V4cGlyZWRtZXJjaGFu\
-dC5vcmcxHjAcBgNVBAoMFUV4cGlyZWQgVGVzdCBNZXJjaGFudDCBnzANBgkqhkiG\
-9w0BAQEFAAOBjQAwgYkCgYEAx5DMvFtbuh7FpUqnVk5jCn+eICAsTX8W2Pq3DLQH\
-7a+toQmMdndkIkkXdaQlM5qNdiIkl91sUh8Gk509zBQ+o0cevszOl3RmqyNs6WJX\
-tdQDc7uIALYTde7kUB1djuUMVbczWjHSniS109i/bXxHci/vvWVKqEJnQGBvYsd9\
-9IUCAwEAAaMQMA4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOBgQAaU137\
-j53rvSjlmYZpZ4RWTP7EdD6fl5ZxBeXHytN6DQL33H0eD7OFHt+ofc7E6D7keubl\
-UfCu+jOvt/MvvPUmtCI9yXZ0dNC4sjyETv+wQpxO0UNZwOM4uegdCzlo6Bi3pD4/\
-KKLdMkWuUfuPBmoammny74lZaOVr5deKXztTuCI0Eh8IsNsGEhl2qRSVYIoDyPul\
-6RMbTSzv4tVhVfGZqIisGLLhxYsFKgtVbml0VGVzdFR3byqAAXHuo4nZEPniLpkd\
-y30TkwBxVgprWJ18a9z/7Py35Qss/JMbOXbnBhJtmJCdIowHRI0aa+zqt3KKKAXi\
-mm+V4seMgxTcxMS+eDDkiTcB/RtWWSyRcS2ANjFeY0T4SLMwiCL9qWPi03hr8j96\
-tejrSPOBNSJ3Mi/q5u2Yl4gJZY2b\
-";
+    <meta name="google-site-verification" content="KT5gs8h0wvaagLKAVWq8bbeNwnZZK1r1XQysX3xurLU">
+    <meta name="google-analytics" content="UA-3769691-2">
 
-//
-// 10-long certificate chain, all intermediates valid
-//
-const char* paymentrequest3_cert1_BASE64 =
-"\
-Egt4NTA5K3NoYTI1Nhq8JAr/AzCCAfswggFkoAMCAQICAQEwDQYJKoZIhvcNAQEL\
-BQAwPzEUMBIGA1UEAwwLdGVzdGNhOC5vcmcxJzAlBgNVBAoMHlBheW1lbnQgUmVx\
-dWVzdCBJbnRlcm1lZGlhdGUgODAeFw0xMzAyMjMyMjQyMzFaFw0yMzAyMjEyMjQy\
-MzFaMDYxGjAYBgNVBAMMEXRlc3RtZXJjaGFudDgub3JnMRgwFgYDVQQKDA9UZXN0\
-IE1lcmNoYW50IDgwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMMCHA3hiHbS\
-TKZ5K9jHRwE8NxkGp3IOx56PDB2diNkldG8XweTcRq7bBm7pdiBt4IVggtfs+6hE\
-hDYIOecyoAnVzPFTdvQ7KQdQ/fD9YLe6lk+o0edOqutPMyrxLFjSluXxEQyk7fdt\
-URloMMYfp3p1/hFCboA1rAsQ2RW38hR5AgMBAAGjEDAOMAwGA1UdEwQFMAMBAf8w\
-DQYJKoZIhvcNAQELBQADgYEAPsdFatnc2RJSpvZsw+nCiPVsllycw5ELglq9vfJz\
-nJJucRxgzmqI2iuas1ugwbXn0BEIRLK7vMF/qBzQR6M/nTxttah+KEu+okjps9vJ\
-cIyhfTyGPC5xkHaHZ7sG+UHOFhPw0/kXn0x+pbVgBZ5315axqcp1R+DTSj/whMAr\
-n0AKiAQwggIEMIIBbaADAgECAgECMA0GCSqGSIb3DQEBCwUAMD8xFDASBgNVBAMM\
-C3Rlc3RjYTcub3JnMScwJQYDVQQKDB5QYXltZW50IFJlcXVlc3QgSW50ZXJtZWRp\
-YXRlIDcwHhcNMTMwMjIzMjI0MjMxWhcNMjMwMjIxMjI0MjMxWjA/MRQwEgYDVQQD\
-DAt0ZXN0Y2E4Lm9yZzEnMCUGA1UECgweUGF5bWVudCBSZXF1ZXN0IEludGVybWVk\
-aWF0ZSA4MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDexUFfxb1sThvabp7u\
-dZz59ciThGmmAW0nP4tjrgEACgvWIInr2dZpTHbiQNF34ycsk0le1JD93D7Qb8rd\
-25OrpaO8XS2Li2zjR9cleixXjSLwV/zv8zJ8yPl/27XL++PDTKBXVpJ8/Syp+9Ty\
-plV1BqDhqtIHb/QSHEkTQXjeYQIDAQABoxAwDjAMBgNVHRMEBTADAQH/MA0GCSqG\
-SIb3DQEBCwUAA4GBACMooQVbkbIZ2DaPwHDc4ULwguG3VI2Kzj50UdExmHtzm2S4\
-MQei+n+HEPjtJAx5OY520+10nfuP+12H2DRLQmWmdvDpeQ/Cv0yavlw4ZRejRFo7\
-KS83C0wo5rd+qTvvOmAN4UTArWkzYcEUulPdiXnRamb0WQHTeVdIbHVkMormCogE\
-MIICBDCCAW2gAwIBAgIBAjANBgkqhkiG9w0BAQsFADA/MRQwEgYDVQQDDAt0ZXN0\
-Y2E2Lm9yZzEnMCUGA1UECgweUGF5bWVudCBSZXF1ZXN0IEludGVybWVkaWF0ZSA2\
-MB4XDTEzMDIyMzIyNDIzMVoXDTIzMDIyMTIyNDIzMVowPzEUMBIGA1UEAwwLdGVz\
-dGNhNy5vcmcxJzAlBgNVBAoMHlBheW1lbnQgUmVxdWVzdCBJbnRlcm1lZGlhdGUg\
-NzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAtjBRazrkebXAhXsbjimrMIRm\
-W/f9SwAHwXfc042keNtl0t2z6XE6UPcR2v/KrssXuCZgodeYxz6IM6lWosCM1xot\
-C3ChKKFBfVO30reuKBRUxXfKAFqxaG0YOAEzdZkkY9AGhqWloeSmgxpIfhInU0EF\
-JjCwrJ6IkijBatGoAAECAwEAAaMQMA4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0B\
-AQsFAAOBgQDBRTi1MolmOA0niHYX0A2lN5QWHkCfX0A7GwyoMA3dvM45m/NYd4WB\
-X+HwfnfYcI6X9jOgNo5OWmc4GGsld0HlxwMYEKISBS9PbSHPBrb3TBOlw5ztQpXZ\
-91+bOhLux52Fr03sK7v9qExmBM12M8UR2ltpzAMiUgLLMHyPfiWkvQqIBDCCAgQw\
-ggFtoAMCAQICAQIwDQYJKoZIhvcNAQELBQAwPzEUMBIGA1UEAwwLdGVzdGNhNS5v\
-cmcxJzAlBgNVBAoMHlBheW1lbnQgUmVxdWVzdCBJbnRlcm1lZGlhdGUgNTAeFw0x\
-MzAyMjMyMjQyMzBaFw0yMzAyMjEyMjQyMzBaMD8xFDASBgNVBAMMC3Rlc3RjYTYu\
-b3JnMScwJQYDVQQKDB5QYXltZW50IFJlcXVlc3QgSW50ZXJtZWRpYXRlIDYwgZ8w\
-DQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBANJSH3xivX1t9olIdHsznI1aE9SD7t9i\
-SZJsIB0otoETHZRVv9M9LvyzBNK98ZV+kTOlST7PJgC0d9BQM9sgYApSRq5oqKDM\
-9FXbOm/yaReAbU3mkFNFw5roTlJ5ThEy0yOGT/DS0YBRaGIvRPRj2DiqDVdCZZ+w\
-4jo1IYHkZt4FAgMBAAGjEDAOMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQELBQAD\
-gYEATm6+J1OmbrothO60xALKonWMBKr6hudb4amkFBqKbA9wMeM3jl+I/yKfz/Uf\
-xWuJ071IhiNv6Gxx5YwNvhUe1xMhUqHv0gpyK1Z47bD+kYS2se5sWNPNo3Y9qZDG\
-IXiGQxwHmrzaFk79Uy1xsmvsEz42w6hr25Yaw7HkIgrFveoKiAQwggIEMIIBbaAD\
-AgECAgECMA0GCSqGSIb3DQEBCwUAMD8xFDASBgNVBAMMC3Rlc3RjYTQub3JnMScw\
-JQYDVQQKDB5QYXltZW50IFJlcXVlc3QgSW50ZXJtZWRpYXRlIDQwHhcNMTMwMjIz\
-MjI0MjMwWhcNMjMwMjIxMjI0MjMwWjA/MRQwEgYDVQQDDAt0ZXN0Y2E1Lm9yZzEn\
-MCUGA1UECgweUGF5bWVudCBSZXF1ZXN0IEludGVybWVkaWF0ZSA1MIGfMA0GCSqG\
-SIb3DQEBAQUAA4GNADCBiQKBgQC7vVUFpxHzz2Tr/xij3k58s8d/BPA0R6D5RXTV\
-vmhAzc1Zuin4zUKRFs/aCj/0yED8Wu/COfNGF4tVlRNMdl9EcFsxa8XGEL4eAZa+\
-H/rOHH+7/1EINrrVWhZlUecyhilN8jmCZmqEM3ecuD0NAViqyMrgmaiFmsLoQZpE\
-GepDUQIDAQABoxAwDjAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4GBAEdJ\
-Ss8jWiooja3WZzHXeF95QkBJNjIlpDLGcpl4opOYLSuEl9Uxp//LaQQiXuzpj4/I\
-pkWGQmMy5HOyH1lqDyiMgXpcG8PE0jEQAoEUGZ0QEqB1mZ6BCrYvmUuf/5aSVd8Y\
-6lKMR3WzFDYU9Zy0nzuHB/3nvp6MeDRQeRMtYvz4CogEMIICBDCCAW2gAwIBAgIB\
-AjANBgkqhkiG9w0BAQsFADA/MRQwEgYDVQQDDAt0ZXN0Y2EzLm9yZzEnMCUGA1UE\
-CgweUGF5bWVudCBSZXF1ZXN0IEludGVybWVkaWF0ZSAzMB4XDTEzMDIyMzIyNDIy\
-OVoXDTIzMDIyMTIyNDIyOVowPzEUMBIGA1UEAwwLdGVzdGNhNC5vcmcxJzAlBgNV\
-BAoMHlBheW1lbnQgUmVxdWVzdCBJbnRlcm1lZGlhdGUgNDCBnzANBgkqhkiG9w0B\
-AQEFAAOBjQAwgYkCgYEAxYYo3w2UXiYg6O8b4QgwN/vgreTkiW122Ep/z2TiDrhV\
-MhfOOiKdwYESPflfnXnVaQQzCGexYTQqsvqvzHSyna5hL0zPTRJxSKmTVrXRsWtp\
-dCRhjxCGipS3tlQBDi7vb+7SNRIBK4dBjjGzALNk7gMCpy+yM8f6I043jTlmGb0C\
-AwEAAaMQMA4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOBgQDU+IQxt3Oh\
-KqaUYWC23+cB2gekvWqwMBnrCNrX/Dp+kjoJKUoR2Fs3qw53raHES4SIhpGT9l9l\
-rppNQgFe/JMHeYqOZMZO+6kuU0olJanBJ14tPIc7zlMTQ9OfmZ6v07IpyFbsQDtR\
-hpe80DpuvSFPfJ4fh0WrQf6kn3KDVpGDnAqIBDCCAgQwggFtoAMCAQICAQIwDQYJ\
-KoZIhvcNAQELBQAwPzEUMBIGA1UEAwwLdGVzdGNhMi5vcmcxJzAlBgNVBAoMHlBh\
-eW1lbnQgUmVxdWVzdCBJbnRlcm1lZGlhdGUgMjAeFw0xMzAyMjMyMjQyMjlaFw0y\
-MzAyMjEyMjQyMjlaMD8xFDASBgNVBAMMC3Rlc3RjYTMub3JnMScwJQYDVQQKDB5Q\
-YXltZW50IFJlcXVlc3QgSW50ZXJtZWRpYXRlIDMwgZ8wDQYJKoZIhvcNAQEBBQAD\
-gY0AMIGJAoGBANzgVP99Qg98e6NsKEz1v5KqRB7NTBRRsYnBvb/TSWipvMQaCYuE\
-yk1xG57x++QuASKeR3QHRQJOoAhQaj9JLUhSSv9GQ5PrFLLsOFv7L1tpzXHh2dOB\
-IW92X2yFRW2s39q+Q21yvN+N8uoKdqXhzRA+dDoXh3cavaVeHX1G+IrlAgMBAAGj\
-EDAOMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQELBQADgYEASTwg84cX+1UhOG9s\
-ejFV3m34QuI1hPZ+qhqVJlRYUtego8Wng1BburDSwqVAv4ch2wi3c2s4e8J7AXyL\
-tzSbSQG4RN0oZi0mR8EtTTN+Mix/hBIk79dMZg85+I29uFA6Zj2d9oAhQv2qkHhc\
-6tcaheNvkQRlCyH68k3iF1Fqf+4KiAQwggIEMIIBbaADAgECAgECMA0GCSqGSIb3\
-DQEBCwUAMD8xFDASBgNVBAMMC3Rlc3RjYTEub3JnMScwJQYDVQQKDB5QYXltZW50\
-IFJlcXVlc3QgSW50ZXJtZWRpYXRlIDEwHhcNMTMwMjIzMjI0MjI5WhcNMjMwMjIx\
-MjI0MjI5WjA/MRQwEgYDVQQDDAt0ZXN0Y2EyLm9yZzEnMCUGA1UECgweUGF5bWVu\
-dCBSZXF1ZXN0IEludGVybWVkaWF0ZSAyMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCB\
-iQKBgQDaV8zhfyQuSf/f+fauMfgs3g/RnWy9yxxUkvQneQQPH3uZzCyk3A6q72ip\
-TtwNqiibG9455L9A7SaUjGtnpUz0NKT/VWUdqbfCl1PqXjEZbDobbAQ5hxLGOTyL\
-RQhLIcgeq2/BnmeCqHsC4md04nUp+nBo1HwKyygvK+9sMbCp/wIDAQABoxAwDjAM\
-BgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4GBACvYyE+PPmWFkbjyRu9LAt8D\
-crtyYYLRClKSg6tVvutwukLG2l//kDOohYkJtgTqr6LnCIIIwYdXN+4wxugmw4cn\
-PIZmP6kovxjhhVM95okilor1zniTAo3RN7JDIfTGNgxLdGu1btt7DOFL4zTbeSJM\
-b8M1JpPftehH+x/VLyuUCuoDMIIB5jCCAU+gAwIBAgIBBTANBgkqhkiG9w0BAQsF\
-ADAhMR8wHQYDVQQDExZQYXltZW50UmVxdWVzdCBUZXN0IENBMB4XDTEzMDIyMzIy\
-NDIyOFoXDTIzMDIyMTIyNDIyOFowPzEUMBIGA1UEAwwLdGVzdGNhMS5vcmcxJzAl\
-BgNVBAoMHlBheW1lbnQgUmVxdWVzdCBJbnRlcm1lZGlhdGUgMTCBnzANBgkqhkiG\
-9w0BAQEFAAOBjQAwgYkCgYEAo5Vy9H3nA/OOkF5Ap89yfVNSiTay/LYCaB0eALpc\
-U690U75O9Q3w2M+2AN8wpbbHsJHZMIjEeBRoQfjlYXW1ucQTxWKyT+liu0D25mGX\
-X27CBXBd4iXTxVII/iX+u3lcjORjoHOBy7QgeIDIIS9y0vYu8eArpjh7m4thrVgI\
-RtMCAwEAAaMQMA4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOBgQB9LKcV\
-JK9sjASNzpQlpUp7nCiw5FSjVY+XMRIKK/kavzlKjZ+InsmmyRVGjDoZi9GrqG9P\
-VHgLBxi2VtVjmokZoNPqao3OfhqORAubC+JR/JLepM7aDaxDdTHVhSUk4lgNAvi2\
-6dGY7nZMsnHlPQ2tPp/HvRRiMq1oDjlylc8VTCI2Eh8IsNsGEhl2qRSVYIoDyPul\
-6RMbTSzv4tVhVfGZqIisGLLhxYsFKg1Vbml0VGVzdFRocmVlKoABn2HTsUQtMNI4\
-yNvkfkFNka3pRvTUTydJrvyfmEeLzImfM1BWddZjnywku9RToNFZZNgow5QnljmF\
-chhR/aHOuEMTxmc12K4rNlgYtHCsxLP9zd+6u0cva3TucZ6EzS8PKEib/+r12/52\
-664NuWA9WtsK7QCFrK2K95PnVCRmWl0=\
-";
+<meta content="collector.githubapp.com" name="octolytics-host" /><meta content="github" name="octolytics-app-id" /><meta content="6B6BBD96:0D19:1522AD17:56253BBF" name="octolytics-dimension-request_id" />
 
-//
-// Long certificate chain, with an expired certificate in the middle
-//
-const char* paymentrequest4_cert1_BASE64 =
-"\
-Egt4NTA5K3NoYTI1NhqeJAr/AzCCAfswggFkoAMCAQICAQEwDQYJKoZIhvcNAQEL\
-BQAwPzEUMBIGA1UEAwwLdGVzdGNhOC5vcmcxJzAlBgNVBAoMHlBheW1lbnQgUmVx\
-dWVzdCBJbnRlcm1lZGlhdGUgODAeFw0xMzAyMjMyMjQyMzFaFw0yMzAyMjEyMjQy\
-MzFaMDYxGjAYBgNVBAMMEXRlc3RtZXJjaGFudDgub3JnMRgwFgYDVQQKDA9UZXN0\
-IE1lcmNoYW50IDgwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMMCHA3hiHbS\
-TKZ5K9jHRwE8NxkGp3IOx56PDB2diNkldG8XweTcRq7bBm7pdiBt4IVggtfs+6hE\
-hDYIOecyoAnVzPFTdvQ7KQdQ/fD9YLe6lk+o0edOqutPMyrxLFjSluXxEQyk7fdt\
-URloMMYfp3p1/hFCboA1rAsQ2RW38hR5AgMBAAGjEDAOMAwGA1UdEwQFMAMBAf8w\
-DQYJKoZIhvcNAQELBQADgYEAPsdFatnc2RJSpvZsw+nCiPVsllycw5ELglq9vfJz\
-nJJucRxgzmqI2iuas1ugwbXn0BEIRLK7vMF/qBzQR6M/nTxttah+KEu+okjps9vJ\
-cIyhfTyGPC5xkHaHZ7sG+UHOFhPw0/kXn0x+pbVgBZ5315axqcp1R+DTSj/whMAr\
-n0AKiAQwggIEMIIBbaADAgECAgECMA0GCSqGSIb3DQEBCwUAMD8xFDASBgNVBAMM\
-C3Rlc3RjYTcub3JnMScwJQYDVQQKDB5QYXltZW50IFJlcXVlc3QgSW50ZXJtZWRp\
-YXRlIDcwHhcNMTMwMjIzMjI0MjMxWhcNMjMwMjIxMjI0MjMxWjA/MRQwEgYDVQQD\
-DAt0ZXN0Y2E4Lm9yZzEnMCUGA1UECgweUGF5bWVudCBSZXF1ZXN0IEludGVybWVk\
-aWF0ZSA4MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDexUFfxb1sThvabp7u\
-dZz59ciThGmmAW0nP4tjrgEACgvWIInr2dZpTHbiQNF34ycsk0le1JD93D7Qb8rd\
-25OrpaO8XS2Li2zjR9cleixXjSLwV/zv8zJ8yPl/27XL++PDTKBXVpJ8/Syp+9Ty\
-plV1BqDhqtIHb/QSHEkTQXjeYQIDAQABoxAwDjAMBgNVHRMEBTADAQH/MA0GCSqG\
-SIb3DQEBCwUAA4GBACMooQVbkbIZ2DaPwHDc4ULwguG3VI2Kzj50UdExmHtzm2S4\
-MQei+n+HEPjtJAx5OY520+10nfuP+12H2DRLQmWmdvDpeQ/Cv0yavlw4ZRejRFo7\
-KS83C0wo5rd+qTvvOmAN4UTArWkzYcEUulPdiXnRamb0WQHTeVdIbHVkMormCogE\
-MIICBDCCAW2gAwIBAgIBAjANBgkqhkiG9w0BAQsFADA/MRQwEgYDVQQDDAt0ZXN0\
-Y2E2Lm9yZzEnMCUGA1UECgweUGF5bWVudCBSZXF1ZXN0IEludGVybWVkaWF0ZSA2\
-MB4XDTEzMDIyMzIyNDIzMVoXDTIzMDIyMTIyNDIzMVowPzEUMBIGA1UEAwwLdGVz\
-dGNhNy5vcmcxJzAlBgNVBAoMHlBheW1lbnQgUmVxdWVzdCBJbnRlcm1lZGlhdGUg\
-NzCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAtjBRazrkebXAhXsbjimrMIRm\
-W/f9SwAHwXfc042keNtl0t2z6XE6UPcR2v/KrssXuCZgodeYxz6IM6lWosCM1xot\
-C3ChKKFBfVO30reuKBRUxXfKAFqxaG0YOAEzdZkkY9AGhqWloeSmgxpIfhInU0EF\
-JjCwrJ6IkijBatGoAAECAwEAAaMQMA4wDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0B\
-AQsFAAOBgQDBRTi1MolmOA0niHYX0A2lN5QWHkCfX0A7GwyoMA3dvM45m/NYd4WB\
-X+HwfnfYcI6X9jOgNo5OWmc4GGsld0HlxwMYEKISBS9PbSHPBrb3TBOlw5ztQpXZ\
-91+bOhLux52Fr03sK7v9qExmBM12M8UR2ltpzAMiUgLLMHyPfiWkvQqIBDCCAgQw\
-ggFtoAMCAQICAQIwDQYJKoZIhvcNAQELBQAwPzEUMBIGA1UEAwwLdGVzdGNhNS5v\
-cmcxJzAlBgNVBAoMHlBheW1lbnQgUmVxdWVzdCBJbnRlcm1lZGlhdGUgNTAeFw0x\
-MzAyMjMyMjQyMzBaFw0yMzAyMjEyMjQyMzBaMD8xFDASBgNVBAMMC3Rlc3RjYTYu\
-b3JnMScwJQYDVQQKDB5QYXltZW50IFJlcXVlc3QgSW50ZXJtZWRpYXRlIDYwgZ8w\
-DQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBANJSH3xivX1t9olIdHsznI1aE9SD7t9i\
-SZJsIB0otoETHZRVv9M9LvyzBNK98ZV+kTOlST7PJgC0d9BQM9sgYApSRq5oqKDM\
-9FXbOm/yaReAbU3mkFNFw5roTlJ5ThEy0yOGT/DS0YBRaGIvRPRj2DiqDVdCZZ+w\
-4jo1IYHkZt4FAgMBAAGjEDAOMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQELBQAD\
-gYEATm6+J1OmbrothO60xALKonWMBKr6hudb4amkFBqKbA9wMeM3jl+I/yKfz/Uf\
-xWuJ071IhiNv6Gxx5YwNvhUe1xMhUqHv0gpyK1Z47bD+kYS2se5sWNPNo3Y9qZDG\
-IXiGQxwHmrzaFk79Uy1xsmvsEz42w6hr25Yaw7HkIgrFveoK6gMwggHmMIIBT6AD\
-AgECAgEGMA0GCSqGSIb3DQEBCwUAMCExHzAdBgNVBAMTFlBheW1lbnRSZXF1ZXN0\
-IFRlc3QgQ0EwHhcNMTMwMjIzMjI1OTUxWhcNMTMwMjI0MjI1OTUxWjA/MRQwEgYD\
-VQQDDAt0ZXN0Y2E1Lm9yZzEnMCUGA1UECgweUGF5bWVudCBSZXF1ZXN0IEludGVy\
-bWVkaWF0ZSA1MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7vVUFpxHzz2Tr\
-/xij3k58s8d/BPA0R6D5RXTVvmhAzc1Zuin4zUKRFs/aCj/0yED8Wu/COfNGF4tV\
-lRNMdl9EcFsxa8XGEL4eAZa+H/rOHH+7/1EINrrVWhZlUecyhilN8jmCZmqEM3ec\
-uD0NAViqyMrgmaiFmsLoQZpEGepDUQIDAQABoxAwDjAMBgNVHRMEBTADAQH/MA0G\
-CSqGSIb3DQEBCwUAA4GBAEmcUEnhua/oiXy1fwScLgMqt+jk9mHRpE6SVsIop23Q\
-CY2JfpG6RxhMMzzzhGklEGN6cxG0HCi6B3HJx6PYrFEfTB0rW4K6m0Tvx3WpS9mN\
-uoEuJHLy18ausI/sYAPDHCL+SfBVcqorpaIG2sSpZouRBjRHAyqFAYlwlW87uq5n\
-CogEMIICBDCCAW2gAwIBAgIBAjANBgkqhkiG9w0BAQsFADA/MRQwEgYDVQQDDAt0\
-ZXN0Y2EzLm9yZzEnMCUGA1UECgweUGF5bWVudCBSZXF1ZXN0IEludGVybWVkaWF0\
-ZSAzMB4XDTEzMDIyMzIyNDIyOVoXDTIzMDIyMTIyNDIyOVowPzEUMBIGA1UEAwwL\
-dGVzdGNhNC5vcmcxJzAlBgNVBAoMHlBheW1lbnQgUmVxdWVzdCBJbnRlcm1lZGlh\
-dGUgNDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAxYYo3w2UXiYg6O8b4Qgw\
-N/vgreTkiW122Ep/z2TiDrhVMhfOOiKdwYESPflfnXnVaQQzCGexYTQqsvqvzHSy\
-na5hL0zPTRJxSKmTVrXRsWtpdCRhjxCGipS3tlQBDi7vb+7SNRIBK4dBjjGzALNk\
-7gMCpy+yM8f6I043jTlmGb0CAwEAAaMQMA4wDAYDVR0TBAUwAwEB/zANBgkqhkiG\
-9w0BAQsFAAOBgQDU+IQxt3OhKqaUYWC23+cB2gekvWqwMBnrCNrX/Dp+kjoJKUoR\
-2Fs3qw53raHES4SIhpGT9l9lrppNQgFe/JMHeYqOZMZO+6kuU0olJanBJ14tPIc7\
-zlMTQ9OfmZ6v07IpyFbsQDtRhpe80DpuvSFPfJ4fh0WrQf6kn3KDVpGDnAqIBDCC\
-AgQwggFtoAMCAQICAQIwDQYJKoZIhvcNAQELBQAwPzEUMBIGA1UEAwwLdGVzdGNh\
-Mi5vcmcxJzAlBgNVBAoMHlBheW1lbnQgUmVxdWVzdCBJbnRlcm1lZGlhdGUgMjAe\
-Fw0xMzAyMjMyMjQyMjlaFw0yMzAyMjEyMjQyMjlaMD8xFDASBgNVBAMMC3Rlc3Rj\
-YTMub3JnMScwJQYDVQQKDB5QYXltZW50IFJlcXVlc3QgSW50ZXJtZWRpYXRlIDMw\
-gZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBANzgVP99Qg98e6NsKEz1v5KqRB7N\
-TBRRsYnBvb/TSWipvMQaCYuEyk1xG57x++QuASKeR3QHRQJOoAhQaj9JLUhSSv9G\
-Q5PrFLLsOFv7L1tpzXHh2dOBIW92X2yFRW2s39q+Q21yvN+N8uoKdqXhzRA+dDoX\
-h3cavaVeHX1G+IrlAgMBAAGjEDAOMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEL\
-BQADgYEASTwg84cX+1UhOG9sejFV3m34QuI1hPZ+qhqVJlRYUtego8Wng1BburDS\
-wqVAv4ch2wi3c2s4e8J7AXyLtzSbSQG4RN0oZi0mR8EtTTN+Mix/hBIk79dMZg85\
-+I29uFA6Zj2d9oAhQv2qkHhc6tcaheNvkQRlCyH68k3iF1Fqf+4KiAQwggIEMIIB\
-baADAgECAgECMA0GCSqGSIb3DQEBCwUAMD8xFDASBgNVBAMMC3Rlc3RjYTEub3Jn\
-MScwJQYDVQQKDB5QYXltZW50IFJlcXVlc3QgSW50ZXJtZWRpYXRlIDEwHhcNMTMw\
-MjIzMjI0MjI5WhcNMjMwMjIxMjI0MjI5WjA/MRQwEgYDVQQDDAt0ZXN0Y2EyLm9y\
-ZzEnMCUGA1UECgweUGF5bWVudCBSZXF1ZXN0IEludGVybWVkaWF0ZSAyMIGfMA0G\
-CSqGSIb3DQEBAQUAA4GNADCBiQKBgQDaV8zhfyQuSf/f+fauMfgs3g/RnWy9yxxU\
-kvQneQQPH3uZzCyk3A6q72ipTtwNqiibG9455L9A7SaUjGtnpUz0NKT/VWUdqbfC\
-l1PqXjEZbDobbAQ5hxLGOTyLRQhLIcgeq2/BnmeCqHsC4md04nUp+nBo1HwKyygv\
-K+9sMbCp/wIDAQABoxAwDjAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4GB\
-ACvYyE+PPmWFkbjyRu9LAt8DcrtyYYLRClKSg6tVvutwukLG2l//kDOohYkJtgTq\
-r6LnCIIIwYdXN+4wxugmw4cnPIZmP6kovxjhhVM95okilor1zniTAo3RN7JDIfTG\
-NgxLdGu1btt7DOFL4zTbeSJMb8M1JpPftehH+x/VLyuUCuoDMIIB5jCCAU+gAwIB\
-AgIBBTANBgkqhkiG9w0BAQsFADAhMR8wHQYDVQQDExZQYXltZW50UmVxdWVzdCBU\
-ZXN0IENBMB4XDTEzMDIyMzIyNDIyOFoXDTIzMDIyMTIyNDIyOFowPzEUMBIGA1UE\
-AwwLdGVzdGNhMS5vcmcxJzAlBgNVBAoMHlBheW1lbnQgUmVxdWVzdCBJbnRlcm1l\
-ZGlhdGUgMTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAo5Vy9H3nA/OOkF5A\
-p89yfVNSiTay/LYCaB0eALpcU690U75O9Q3w2M+2AN8wpbbHsJHZMIjEeBRoQfjl\
-YXW1ucQTxWKyT+liu0D25mGXX27CBXBd4iXTxVII/iX+u3lcjORjoHOBy7QgeIDI\
-IS9y0vYu8eArpjh7m4thrVgIRtMCAwEAAaMQMA4wDAYDVR0TBAUwAwEB/zANBgkq\
-hkiG9w0BAQsFAAOBgQB9LKcVJK9sjASNzpQlpUp7nCiw5FSjVY+XMRIKK/kavzlK\
-jZ+InsmmyRVGjDoZi9GrqG9PVHgLBxi2VtVjmokZoNPqao3OfhqORAubC+JR/JLe\
-pM7aDaxDdTHVhSUk4lgNAvi26dGY7nZMsnHlPQ2tPp/HvRRiMq1oDjlylc8VTCI1\
-Eh8IsNsGEhl2qRSVYIoDyPul6RMbTSzv4tVhVfGZqIisGLLhxYsFKgxVbml0VGVz\
-dEZvdXIqgAEBE1PP93Tkpif35F+dYmXn9kLA/1djcPjCs2o2rwRMM4Uk356O5dgu\
-HXQjsfdR58qZQS9CS5DAtRUf0R8+43/wijO/hb49VNaNXmY+/cPHMkahP2aV3tZi\
-FAyZblLik9A7ZvF+UsjeFQiHB5wzWQvbqk5wQ4yabHIXoYv/E0q+eQ==\
-";
+<meta content="Rails, view, blob#show" data-pjax-transient="true" name="analytics-event" />
 
-//
-// Validly signed, but by a CA not in our root CA list
-//
-const char* paymentrequest5_cert1_BASE64 =
-"\
-Egt4NTA5K3NoYTI1NhrxAwruAzCCAeowggFToAMCAQICAQEwDQYJKoZIhvcNAQEL\
-BQAwITEfMB0GA1UEAxMWUGF5bWVudFJlcXVlc3QgVGVzdCBDQTAeFw0xMzA0MTkx\
-NzIwMDZaFw0yMzA0MTcxNzIwMDZaMEMxGTAXBgNVBAMMEHRlc3RtZXJjaGFudC5v\
-cmcxJjAkBgNVBAoMHVBheW1lbnQgUmVxdWVzdCBUZXN0IE1lcmNoYW50MIGfMA0G\
-CSqGSIb3DQEBAQUAA4GNADCBiQKBgQDhV6Yn47aEEmbl50YLvXoqGEJA51I/40wr\
-Z6VQGdXYaRqYktagrWDlgYY9h0JQ1bQhm8HgW7ju0R4NaDTXUqxg4HjprF0z3Mfm\
-/6mmebkLOOptfkVD7ceAteNI7cyuqWGIAZA7D9mV97mXoCAtTlBUycvkmoiClCCS\
-h0EpF/UTaQIDAQABoxAwDjAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBCwUAA4GB\
-AGIRwW7I0QvLga+RnJoJSZNZQbtu4rQW3xmoz8WfZMBYXX3QBYg5ftycbdK+/IbP\
-qozfjGW2AS6DNArvpveSPDTK9+GJBNo1paiNtVqwXkC3Ddscv5AIms1eZGiIOQNC\
-mUvdLkpoXo48WAer3EGsZ3B15GyNEELc0q9W5yUebba1IjUSHwiw2wYSGXapFJVg\
-igPI+6XpExtNLO/i1WFV8ZmoiKwYuPvFiwUqDFVuaXRUZXN0Rml2ZSqAAXdsMgdG\
-ssymvca1S/1KeM3n8Ydi2fi1JUzAAr59xPvNJRUeqCLP9upHn5z7br3P12Oz9A20\
-5/4wL4ClPRPVnOHgij0bEg+y0tGESqmF1rfOfXDszlo2U92wCxS07kq79YAZJ1Zo\
-XYh860/Q4wvc7lfiTe+dXBzPKAKhMy91yETY\
-";
 
-//
-// Contains a testnet paytoaddress, so payment request network doesn't match client network
-//
-const char* paymentrequest1_cert2_BASE64 =
-"\
-Egt4NTA5K3NoYTI1NhrQBArNBDCCAkkwggExoAMCAQICAQEwDQYJKoZIhvcNAQEL\
-BQAwITEfMB0GA1UEAwwWUGF5bWVudFJlcXVlc3QgVGVzdCBDQTAeFw0xNTAxMTEx\
-ODIxMDhaFw0yNTAxMDgxODIxMDhaMCExHzAdBgNVBAMMFlBheW1lbnRSZXF1ZXN0\
-IFRlc3QgQ0EwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMsZqzkzeBGo+i2N\
-mUak3Ciodr1V7S062VOy7N0OQYNDQHYkgDFAUET7cEb5VJaHPv5m3ppTBpU9xBcf\
-wbHHUt4VjA+mhRmYrl1khjvZM+X8kEqvWn20BtcM9R6r0yIYec8UERDDHBleL/P8\
-RkxEnVLjYTV9zigCXfMsgYb3EQShAgMBAAGjEDAOMAwGA1UdEwQFMAMBAf8wDQYJ\
-KoZIhvcNAQELBQADggEBABUJpl3QCqsoDSxAsQdV6zKT4VGV76AzoGj7etQsQY+r\
-+S26VfWh/fMobEzuxFChr0USgLJ6FoK78hAtoZvt1lrye9yqFv/ig3WLWsJKWHHb\
-3RT6oR03CIwZXFSUasi08QDVLxafwsU5OMcPLucF3a1lRL1ccYrNgVCCx1+X7Bos\
-tIgDGRQQ4AyoHTcfVd2hEGeUv7k14mOxFsAp6851yosHq9Q2kwmdH+rHEJbjof87\
-yyKLagc4owyXBZYkQmkeHWCNqnuRmO5vUsfVb0UUrkD64o7Th/NjwooA7SCiUXl6\
-dfygT1b7ggpx7GC+sP2DsIM47IAZ55drjqX5u2f+Ba0iPQoEdGVzdBIhCIDWwowE\
-Ehl2qRQErGqUUwSsaMpDvWIaGnJGNQqi8oisGNeMy6UFKgxKdXN0IFRlc3Rpbmcq\
-gAFwThsozZxkZxzCn4R8WxNiLFV6m0ye9fEtSbolfaW+EjBMpO03lr/dwNnrclhg\
-ew+A05xfZztrAt16XKEY7qKJ/eY2nLd0fVAIu/nIt+7/VYVXT83zLrWc150aRS7W\
-AdJbL3JOJLs6Eyp5zrPbfI8faRttFAdONKDrJgIpuW1E3g==\
-";
+  <meta class="js-ga-set" name="dimension1" content="Logged Out">
+    <meta class="js-ga-set" name="dimension4" content="Current repo nav">
 
-//
-// Expired payment request (expires is set to 1 = 1970-01-01 00:00:01)
-//
-const char* paymentrequest2_cert2_BASE64 =
-"\
-Egt4NTA5K3NoYTI1NhrQBArNBDCCAkkwggExoAMCAQICAQEwDQYJKoZIhvcNAQEL\
-BQAwITEfMB0GA1UEAwwWUGF5bWVudFJlcXVlc3QgVGVzdCBDQTAeFw0xNTAxMTEx\
-ODIxMDhaFw0yNTAxMDgxODIxMDhaMCExHzAdBgNVBAMMFlBheW1lbnRSZXF1ZXN0\
-IFRlc3QgQ0EwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMsZqzkzeBGo+i2N\
-mUak3Ciodr1V7S062VOy7N0OQYNDQHYkgDFAUET7cEb5VJaHPv5m3ppTBpU9xBcf\
-wbHHUt4VjA+mhRmYrl1khjvZM+X8kEqvWn20BtcM9R6r0yIYec8UERDDHBleL/P8\
-RkxEnVLjYTV9zigCXfMsgYb3EQShAgMBAAGjEDAOMAwGA1UdEwQFMAMBAf8wDQYJ\
-KoZIhvcNAQELBQADggEBABUJpl3QCqsoDSxAsQdV6zKT4VGV76AzoGj7etQsQY+r\
-+S26VfWh/fMobEzuxFChr0USgLJ6FoK78hAtoZvt1lrye9yqFv/ig3WLWsJKWHHb\
-3RT6oR03CIwZXFSUasi08QDVLxafwsU5OMcPLucF3a1lRL1ccYrNgVCCx1+X7Bos\
-tIgDGRQQ4AyoHTcfVd2hEGeUv7k14mOxFsAp6851yosHq9Q2kwmdH+rHEJbjof87\
-yyKLagc4owyXBZYkQmkeHWCNqnuRmO5vUsfVb0UUrkD64o7Th/NjwooA7SCiUXl6\
-dfygT1b7ggpx7GC+sP2DsIM47IAZ55drjqX5u2f+Ba0iQgoEdGVzdBIgCICt4gQS\
-GXapFASsapRTBKxoykO9YhoackY1CqLyiKwYiNLUpQUgASoQVGVzdGluZyB0ZXN0\
-bmV0ISqAATXq9A5nmJgtmee/bQTeHeif4w1YYFPBlKghwx6qbVgXTWnwBJtOQhhV\
-sZdzbTl95ENR7/Y7VJupW9kDWobCK7zUUhLAzUlwmLlcx6itHw8LTUF5HK+AwsZm\
-Zs85lISGvOS0NZW/ENa6l+oQRnL87oqVZr/EDGiuqjz6T0ThQi0l\
-";
 
-//
-// Unexpired payment request (expires is set to 0x7FFFFFFFFFFFFFFF = max. int64_t)
-//
-const char* paymentrequest3_cert2_BASE64 =
-"\
-Egt4NTA5K3NoYTI1NhrQBArNBDCCAkkwggExoAMCAQICAQEwDQYJKoZIhvcNAQEL\
-BQAwITEfMB0GA1UEAwwWUGF5bWVudFJlcXVlc3QgVGVzdCBDQTAeFw0xNTAxMTEx\
-ODIxMDhaFw0yNTAxMDgxODIxMDhaMCExHzAdBgNVBAMMFlBheW1lbnRSZXF1ZXN0\
-IFRlc3QgQ0EwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMsZqzkzeBGo+i2N\
-mUak3Ciodr1V7S062VOy7N0OQYNDQHYkgDFAUET7cEb5VJaHPv5m3ppTBpU9xBcf\
-wbHHUt4VjA+mhRmYrl1khjvZM+X8kEqvWn20BtcM9R6r0yIYec8UERDDHBleL/P8\
-RkxEnVLjYTV9zigCXfMsgYb3EQShAgMBAAGjEDAOMAwGA1UdEwQFMAMBAf8wDQYJ\
-KoZIhvcNAQELBQADggEBABUJpl3QCqsoDSxAsQdV6zKT4VGV76AzoGj7etQsQY+r\
-+S26VfWh/fMobEzuxFChr0USgLJ6FoK78hAtoZvt1lrye9yqFv/ig3WLWsJKWHHb\
-3RT6oR03CIwZXFSUasi08QDVLxafwsU5OMcPLucF3a1lRL1ccYrNgVCCx1+X7Bos\
-tIgDGRQQ4AyoHTcfVd2hEGeUv7k14mOxFsAp6851yosHq9Q2kwmdH+rHEJbjof87\
-yyKLagc4owyXBZYkQmkeHWCNqnuRmO5vUsfVb0UUrkD64o7Th/NjwooA7SCiUXl6\
-dfygT1b7ggpx7GC+sP2DsIM47IAZ55drjqX5u2f+Ba0iSgoEdGVzdBIgCICt4gQS\
-GXapFASsapRTBKxoykO9YhoackY1CqLyiKwYyNfZpQUg//////////9/KhBUZXN0\
-aW5nIHRlc3RuZXQhKoABNwi8WnMW4aMvbmvorTiiWJLFhofLFnsoWCJnj3rWLnLh\
-n3w6q/fZ26p50ERL/noxdTUfeFsKnlECkUu/fOcOrqyYDiwvxI0SZ034DleVyFU1\
-Z3T+X0zcL8oe7bX01Yf+s2V+5JXQXarKnKBrZCGgv2ARjFNSZe7E7vGg5K4Q6Q8=\
-";
 
-//
-// Unexpired payment request (expires is set to 0x8000000000000000 > max. int64_t, allowed uint64)
-//
-const char* paymentrequest4_cert2_BASE64 =
-"\
-Egt4NTA5K3NoYTI1NhrQBArNBDCCAkkwggExoAMCAQICAQEwDQYJKoZIhvcNAQEL\
-BQAwITEfMB0GA1UEAwwWUGF5bWVudFJlcXVlc3QgVGVzdCBDQTAeFw0xNTAxMTEx\
-ODIxMDhaFw0yNTAxMDgxODIxMDhaMCExHzAdBgNVBAMMFlBheW1lbnRSZXF1ZXN0\
-IFRlc3QgQ0EwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMsZqzkzeBGo+i2N\
-mUak3Ciodr1V7S062VOy7N0OQYNDQHYkgDFAUET7cEb5VJaHPv5m3ppTBpU9xBcf\
-wbHHUt4VjA+mhRmYrl1khjvZM+X8kEqvWn20BtcM9R6r0yIYec8UERDDHBleL/P8\
-RkxEnVLjYTV9zigCXfMsgYb3EQShAgMBAAGjEDAOMAwGA1UdEwQFMAMBAf8wDQYJ\
-KoZIhvcNAQELBQADggEBABUJpl3QCqsoDSxAsQdV6zKT4VGV76AzoGj7etQsQY+r\
-+S26VfWh/fMobEzuxFChr0USgLJ6FoK78hAtoZvt1lrye9yqFv/ig3WLWsJKWHHb\
-3RT6oR03CIwZXFSUasi08QDVLxafwsU5OMcPLucF3a1lRL1ccYrNgVCCx1+X7Bos\
-tIgDGRQQ4AyoHTcfVd2hEGeUv7k14mOxFsAp6851yosHq9Q2kwmdH+rHEJbjof87\
-yyKLagc4owyXBZYkQmkeHWCNqnuRmO5vUsfVb0UUrkD64o7Th/NjwooA7SCiUXl6\
-dfygT1b7ggpx7GC+sP2DsIM47IAZ55drjqX5u2f+Ba0iSwoEdGVzdBIgCICt4gQS\
-GXapFASsapRTBKxoykO9YhoackY1CqLyiKwYt+HZpQUggICAgICAgICAASoQVGVz\
-dGluZyB0ZXN0bmV0ISqAAXSQG8+GFA18VaKarlYrOz293rNMIub0swKGcQm8jAGX\
-HSLaRgHfUDeEPr4hydy4dtfu59KNwe2xsHOHu/SpO4L8SrA4Dm9A7SlNBVWdcLbw\
-d2hj739GDLz0b5KuJ2SG6VknMRQM976w/m2qlq0ccVGaaZ2zMIGfpzL3p6adwx/5\
-";
 
-//
-// Payment request with amount overflow (amount is set to 21000001 BTC)
-//
-const char* paymentrequest5_cert2_BASE64 =
-"\
-Egt4NTA5K3NoYTI1NhrQBArNBDCCAkkwggExoAMCAQICAQEwDQYJKoZIhvcNAQEL\
-BQAwITEfMB0GA1UEAwwWUGF5bWVudFJlcXVlc3QgVGVzdCBDQTAeFw0xNTAxMTEx\
-ODIxMDhaFw0yNTAxMDgxODIxMDhaMCExHzAdBgNVBAMMFlBheW1lbnRSZXF1ZXN0\
-IFRlc3QgQ0EwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMsZqzkzeBGo+i2N\
-mUak3Ciodr1V7S062VOy7N0OQYNDQHYkgDFAUET7cEb5VJaHPv5m3ppTBpU9xBcf\
-wbHHUt4VjA+mhRmYrl1khjvZM+X8kEqvWn20BtcM9R6r0yIYec8UERDDHBleL/P8\
-RkxEnVLjYTV9zigCXfMsgYb3EQShAgMBAAGjEDAOMAwGA1UdEwQFMAMBAf8wDQYJ\
-KoZIhvcNAQELBQADggEBABUJpl3QCqsoDSxAsQdV6zKT4VGV76AzoGj7etQsQY+r\
-+S26VfWh/fMobEzuxFChr0USgLJ6FoK78hAtoZvt1lrye9yqFv/ig3WLWsJKWHHb\
-3RT6oR03CIwZXFSUasi08QDVLxafwsU5OMcPLucF3a1lRL1ccYrNgVCCx1+X7Bos\
-tIgDGRQQ4AyoHTcfVd2hEGeUv7k14mOxFsAp6851yosHq9Q2kwmdH+rHEJbjof87\
-yyKLagc4owyXBZYkQmkeHWCNqnuRmO5vUsfVb0UUrkD64o7Th/NjwooA7SCiUXl6\
-dfygT1b7ggpx7GC+sP2DsIM47IAZ55drjqX5u2f+Ba0iTAoEdGVzdBIkCIDC9P+F\
-vt0DEhl2qRQErGqUUwSsaMpDvWIaGnJGNQqi8oisGLzcrKYFKhhUZXN0aW5nIGFt\
-b3VudCBvdmVyZmxvdyEqgAG8S7WEDUC6tCL6q2CTBjop/AitgEy31RL9IqYruytR\
-iEBFUrBDJZU+UEezGwr7/zoECjo5ZY3PmtZcM2sILNjyweJF6XVzGqTxUw6pN6sW\
-XR2T3Gy2LzRvhVA25QgGqpz0/juS2BtmNbsZPkN9gMMwKimgzc+PuCzmEKwPK9cQ\
-YQ==\
-";
+    <meta name="is-dotcom" content="true">
+        <meta name="hostname" content="github.com">
+    <meta name="user-login" content="">
+
+      <link rel="mask-icon" href="https://assets-cdn.github.com/pinned-octocat.svg" color="#4078c0">
+      <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+
+    <meta content="d87bd5f9c3331f5b482a3f5f985a81fe9191b35e" name="form-nonce" />
+
+    <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/github-1c72e5e1cbdeae0d6a25ee0e6f07ae0100db5696d3f5f10ed2acf1f0885ef5f0.css" media="all" rel="stylesheet" />
+    <link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/github2-91f10774cc492e563a1bcd77a9b935a21bffbda4c7fefb5ed448d51a53217852.css" media="all" rel="stylesheet" />
+    
+    
+    
+
+
+    <meta http-equiv="x-pjax-version" content="aaf0a95e6a9bf84b40427e5620ea23c2">
+
+      
+  <meta name="description" content="drivercoin - Cryptocurrency Coin - Driver Coin">
+  <meta name="go-import" content="github.com/drivercoin/drivercoin git https://github.com/drivercoin/drivercoin.git">
+
+  <meta content="15161107" name="octolytics-dimension-user_id" /><meta content="drivercoin" name="octolytics-dimension-user_login" /><meta content="44398313" name="octolytics-dimension-repository_id" /><meta content="drivercoin/drivercoin" name="octolytics-dimension-repository_nwo" /><meta content="true" name="octolytics-dimension-repository_public" /><meta content="false" name="octolytics-dimension-repository_is_fork" /><meta content="44398313" name="octolytics-dimension-repository_network_root_id" /><meta content="drivercoin/drivercoin" name="octolytics-dimension-repository_network_root_nwo" />
+  <link href="https://github.com/drivercoin/drivercoin/commits/master.atom" rel="alternate" title="Recent Commits to drivercoin:master" type="application/atom+xml">
+
+  </head>
+
+
+  <body class="logged_out   env-production linux vis-public page-blob">
+    <a href="#start-of-content" tabindex="1" class="accessibility-aid js-skip-to-content">Skip to content</a>
+
+    
+    
+    
+
+
+
+      
+      <div class="header header-logged-out" role="banner">
+  <div class="container clearfix">
+
+    <a class="header-logo-wordmark" href="https://github.com/" data-ga-click="(Logged out) Header, go to homepage, icon:logo-wordmark">
+      <span class="mega-octicon octicon-logo-github"></span>
+    </a>
+
+    <div class="header-actions" role="navigation">
+        <a class="btn btn-primary" href="/join" data-ga-click="(Logged out) Header, clicked Sign up, text:sign-up">Sign up</a>
+      <a class="btn" href="/login?return_to=%2Fdrivercoin%2Fdrivercoin%2Fblob%2Fmaster%2Fsrc%2Fqt%2Ftest%2Fpaymentservertests.h" data-ga-click="(Logged out) Header, clicked Sign in, text:sign-in">Sign in</a>
+    </div>
+
+    <div class="site-search repo-scope js-site-search" role="search">
+      <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="/drivercoin/drivercoin/search" class="js-site-search-form" data-global-search-url="/search" data-repo-search-url="/drivercoin/drivercoin/search" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+  <label class="js-chromeless-input-container form-control">
+    <div class="scope-badge">This repository</div>
+    <input type="text"
+      class="js-site-search-focus js-site-search-field is-clearable chromeless-input"
+      data-hotkey="s"
+      name="q"
+      placeholder="Search"
+      aria-label="Search this repository"
+      data-global-scope-placeholder="Search GitHub"
+      data-repo-scope-placeholder="Search"
+      tabindex="1"
+      autocapitalize="off">
+  </label>
+</form>
+    </div>
+
+      <ul class="header-nav left" role="navigation">
+          <li class="header-nav-item">
+            <a class="header-nav-link" href="/explore" data-ga-click="(Logged out) Header, go to explore, text:explore">Explore</a>
+          </li>
+          <li class="header-nav-item">
+            <a class="header-nav-link" href="/features" data-ga-click="(Logged out) Header, go to features, text:features">Features</a>
+          </li>
+          <li class="header-nav-item">
+            <a class="header-nav-link" href="https://enterprise.github.com/" data-ga-click="(Logged out) Header, go to enterprise, text:enterprise">Enterprise</a>
+          </li>
+          <li class="header-nav-item">
+            <a class="header-nav-link" href="/pricing" data-ga-click="(Logged out) Header, go to pricing, text:pricing">Pricing</a>
+          </li>
+      </ul>
+
+  </div>
+</div>
+
+
+
+    <div id="start-of-content" class="accessibility-aid"></div>
+
+    <div id="js-flash-container">
+</div>
+
+
+    <div role="main" class="main-content">
+        <div itemscope itemtype="http://schema.org/WebPage">
+    <div class="pagehead repohead instapaper_ignore readability-menu">
+
+      <div class="container">
+
+        <div class="clearfix">
+          
+
+<ul class="pagehead-actions">
+
+  <li>
+      <a href="/login?return_to=%2Fdrivercoin%2Fdrivercoin"
+    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+    aria-label="You must be signed in to watch a repository" rel="nofollow">
+    <span class="octicon octicon-eye"></span>
+    Watch
+  </a>
+  <a class="social-count" href="/drivercoin/drivercoin/watchers">
+    1
+  </a>
+
+  </li>
+
+  <li>
+      <a href="/login?return_to=%2Fdrivercoin%2Fdrivercoin"
+    class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+    aria-label="You must be signed in to star a repository" rel="nofollow">
+    <span class="octicon octicon-star"></span>
+    Star
+  </a>
+
+    <a class="social-count js-social-count" href="/drivercoin/drivercoin/stargazers">
+      0
+    </a>
+
+  </li>
+
+  <li>
+      <a href="/login?return_to=%2Fdrivercoin%2Fdrivercoin"
+        class="btn btn-sm btn-with-count tooltipped tooltipped-n"
+        aria-label="You must be signed in to fork a repository" rel="nofollow">
+        <span class="octicon octicon-repo-forked"></span>
+        Fork
+      </a>
+
+    <a href="/drivercoin/drivercoin/network" class="social-count">
+      0
+    </a>
+  </li>
+</ul>
+
+          <h1 itemscope itemtype="http://data-vocabulary.org/Breadcrumb" class="entry-title public ">
+  <span class="mega-octicon octicon-repo"></span>
+  <span class="author"><a href="/drivercoin" class="url fn" itemprop="url" rel="author"><span itemprop="title">drivercoin</span></a></span><!--
+--><span class="path-divider">/</span><!--
+--><strong><a href="/drivercoin/drivercoin" data-pjax="#js-repo-pjax-container">drivercoin</a></strong>
+
+  <span class="page-context-loader">
+    <img alt="" height="16" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" width="16" />
+  </span>
+
+</h1>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="repository-with-sidebar repo-container new-discussion-timeline ">
+        <div class="repository-sidebar clearfix">
+          
+<nav class="sunken-menu repo-nav js-repo-nav js-sidenav-container-pjax js-octicon-loaders"
+     role="navigation"
+     data-pjax="#js-repo-pjax-container"
+     data-issue-count-url="/drivercoin/drivercoin/issues/counts">
+  <ul class="sunken-menu-group">
+    <li class="tooltipped tooltipped-w" aria-label="Code">
+      <a href="/drivercoin/drivercoin" aria-label="Code" aria-selected="true" class="js-selected-navigation-item selected sunken-menu-item" data-hotkey="g c" data-selected-links="repo_source repo_downloads repo_commits repo_releases repo_tags repo_branches /drivercoin/drivercoin">
+        <span class="octicon octicon-code"></span> <span class="full-word">Code</span>
+        <img alt="" class="mini-loader" height="16" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>    </li>
+
+      <li class="tooltipped tooltipped-w" aria-label="Issues">
+        <a href="/drivercoin/drivercoin/issues" aria-label="Issues" class="js-selected-navigation-item sunken-menu-item" data-hotkey="g i" data-selected-links="repo_issues repo_labels repo_milestones /drivercoin/drivercoin/issues">
+          <span class="octicon octicon-issue-opened"></span> <span class="full-word">Issues</span>
+          <span class="js-issue-replace-counter"></span>
+          <img alt="" class="mini-loader" height="16" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>      </li>
+
+    <li class="tooltipped tooltipped-w" aria-label="Pull requests">
+      <a href="/drivercoin/drivercoin/pulls" aria-label="Pull requests" class="js-selected-navigation-item sunken-menu-item" data-hotkey="g p" data-selected-links="repo_pulls /drivercoin/drivercoin/pulls">
+          <span class="octicon octicon-git-pull-request"></span> <span class="full-word">Pull requests</span>
+          <span class="js-pull-replace-counter"></span>
+          <img alt="" class="mini-loader" height="16" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>    </li>
+
+  </ul>
+  <div class="sunken-menu-separator"></div>
+  <ul class="sunken-menu-group">
+
+    <li class="tooltipped tooltipped-w" aria-label="Pulse">
+      <a href="/drivercoin/drivercoin/pulse" aria-label="Pulse" class="js-selected-navigation-item sunken-menu-item" data-selected-links="pulse /drivercoin/drivercoin/pulse">
+        <span class="octicon octicon-pulse"></span> <span class="full-word">Pulse</span>
+        <img alt="" class="mini-loader" height="16" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>    </li>
+
+    <li class="tooltipped tooltipped-w" aria-label="Graphs">
+      <a href="/drivercoin/drivercoin/graphs" aria-label="Graphs" class="js-selected-navigation-item sunken-menu-item" data-selected-links="repo_graphs repo_contributors /drivercoin/drivercoin/graphs">
+        <span class="octicon octicon-graph"></span> <span class="full-word">Graphs</span>
+        <img alt="" class="mini-loader" height="16" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32.gif" width="16" />
+</a>    </li>
+  </ul>
+
+
+</nav>
+
+            <div class="only-with-full-nav">
+                
+<div class="js-clone-url clone-url open"
+  data-protocol-type="http">
+  <h3 class="text-small"><span class="text-emphasized">HTTPS</span> clone URL</h3>
+  <div class="input-group js-zeroclipboard-container">
+    <input type="text" class="input-mini text-small input-monospace js-url-field js-zeroclipboard-target"
+           value="https://github.com/drivercoin/drivercoin.git" readonly="readonly" aria-label="HTTPS clone URL">
+    <span class="input-group-button">
+      <button aria-label="Copy to clipboard" class="js-zeroclipboard btn btn-sm zeroclipboard-button tooltipped tooltipped-s" data-copied-hint="Copied!" type="button"><span class="octicon octicon-clippy"></span></button>
+    </span>
+  </div>
+</div>
+
+  
+<div class="js-clone-url clone-url "
+  data-protocol-type="subversion">
+  <h3 class="text-small"><span class="text-emphasized">Subversion</span> checkout URL</h3>
+  <div class="input-group js-zeroclipboard-container">
+    <input type="text" class="input-mini text-small input-monospace js-url-field js-zeroclipboard-target"
+           value="https://github.com/drivercoin/drivercoin" readonly="readonly" aria-label="Subversion checkout URL">
+    <span class="input-group-button">
+      <button aria-label="Copy to clipboard" class="js-zeroclipboard btn btn-sm zeroclipboard-button tooltipped tooltipped-s" data-copied-hint="Copied!" type="button"><span class="octicon octicon-clippy"></span></button>
+    </span>
+  </div>
+</div>
+
+
+
+<div class="clone-options text-small">You can clone with
+  <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="/users/set_protocol?protocol_selector=http&amp;protocol_type=clone" class="inline-form js-clone-selector-form " data-form-nonce="d87bd5f9c3331f5b482a3f5f985a81fe9191b35e" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="OzLyOVjYGbEuVzyUQ6/m2+Y5Q+5O5Nj1DuWuDx3xtzVWdYxSLwhMSkyUfTsazVza8fddPyCsmWyio+tQi+t1pQ==" /></div><button class="btn-link js-clone-selector" data-protocol="http" type="submit">HTTPS</button></form> or <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="/users/set_protocol?protocol_selector=subversion&amp;protocol_type=clone" class="inline-form js-clone-selector-form " data-form-nonce="d87bd5f9c3331f5b482a3f5f985a81fe9191b35e" data-remote="true" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="vYsqtLxGp6Uj4VeQNBaPq14/Dq4iNXLgDTPewAzjhMLc21MScBLU+eUcRpFGofZV3UGgm3eaSuPHi6lmms/Pgw==" /></div><button class="btn-link js-clone-selector" data-protocol="subversion" type="submit">Subversion</button></form>.
+  <a href="https://help.github.com/articles/which-remote-url-should-i-use" class="help tooltipped tooltipped-n" aria-label="Get help on which URL is right for you.">
+    <span class="octicon octicon-question"></span>
+  </a>
+</div>
+
+              <a href="/drivercoin/drivercoin/archive/master.zip"
+                 class="btn btn-sm sidebar-button"
+                 aria-label="Download the contents of drivercoin/drivercoin as a zip file"
+                 title="Download the contents of drivercoin/drivercoin as a zip file"
+                 rel="nofollow">
+                <span class="octicon octicon-cloud-download"></span>
+                Download ZIP
+              </a>
+            </div>
+        </div>
+        <div id="js-repo-pjax-container" class="repository-content context-loader-container" data-pjax-container>
+
+          
+
+<a href="/drivercoin/drivercoin/blob/5d17300a3e3c5168ecce8ebb2715901532273f2e/src/qt/test/paymentservertests.h" class="hidden js-permalink-shortcut" data-hotkey="y">Permalink</a>
+
+<!-- blob contrib key: blob_contributors:v21:0803037b88cd42b30cce1f919b15f75d -->
+
+  <div class="file-navigation js-zeroclipboard-container">
+    
+<div class="select-menu js-menu-container js-select-menu left">
+  <button class="btn btn-sm select-menu-button js-menu-target css-truncate" data-hotkey="w"
+    title="master"
+    type="button" aria-label="Switch branches or tags" tabindex="0" aria-haspopup="true">
+    <i>Branch:</i>
+    <span class="js-select-button css-truncate-target">master</span>
+  </button>
+
+  <div class="select-menu-modal-holder js-menu-content js-navigation-container" data-pjax aria-hidden="true">
+
+    <div class="select-menu-modal">
+      <div class="select-menu-header">
+        <span class="select-menu-title">Switch branches/tags</span>
+        <span class="octicon octicon-x js-menu-close" role="button" aria-label="Close"></span>
+      </div>
+
+      <div class="select-menu-filters">
+        <div class="select-menu-text-filter">
+          <input type="text" aria-label="Filter branches/tags" id="context-commitish-filter-field" class="js-filterable-field js-navigation-enable" placeholder="Filter branches/tags">
+        </div>
+        <div class="select-menu-tabs">
+          <ul>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="branches" data-filter-placeholder="Filter branches/tags" class="js-select-menu-tab" role="tab">Branches</a>
+            </li>
+            <li class="select-menu-tab">
+              <a href="#" data-tab-filter="tags" data-filter-placeholder="Find a tag…" class="js-select-menu-tab" role="tab">Tags</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="branches" role="menu">
+
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+            <a class="select-menu-item js-navigation-item js-navigation-open selected"
+               href="/drivercoin/drivercoin/blob/master/src/qt/test/paymentservertests.h"
+               data-name="master"
+               data-skip-pjax="true"
+               rel="nofollow">
+              <span class="select-menu-item-icon octicon octicon-check"></span>
+              <span class="select-menu-item-text css-truncate-target" title="master">
+                master
+              </span>
+            </a>
+        </div>
+
+          <div class="select-menu-no-results">Nothing to show</div>
+      </div>
+
+      <div class="select-menu-list select-menu-tab-bucket js-select-menu-tab-bucket" data-tab-filter="tags">
+        <div data-filterable-for="context-commitish-filter-field" data-filterable-type="substring">
+
+
+        </div>
+
+        <div class="select-menu-no-results">Nothing to show</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+    <div class="btn-group right">
+      <a href="/drivercoin/drivercoin/find/master"
+            class="js-show-file-finder btn btn-sm empty-icon tooltipped tooltipped-nw"
+            data-pjax
+            data-hotkey="t"
+            aria-label="Quickly jump between files">
+        <span class="octicon octicon-list-unordered"></span>
+      </a>
+      <button aria-label="Copy file path to clipboard" class="js-zeroclipboard btn btn-sm zeroclipboard-button tooltipped tooltipped-s" data-copied-hint="Copied!" type="button"><span class="octicon octicon-clippy"></span></button>
+    </div>
+
+    <div class="breadcrumb js-zeroclipboard-target">
+      <span class="repo-root js-repo-root"><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/drivercoin/drivercoin" class="" data-branch="master" data-pjax="true" itemscope="url"><span itemprop="title">drivercoin</span></a></span></span><span class="separator">/</span><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/drivercoin/drivercoin/tree/master/src" class="" data-branch="master" data-pjax="true" itemscope="url"><span itemprop="title">src</span></a></span><span class="separator">/</span><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/drivercoin/drivercoin/tree/master/src/qt" class="" data-branch="master" data-pjax="true" itemscope="url"><span itemprop="title">qt</span></a></span><span class="separator">/</span><span itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/drivercoin/drivercoin/tree/master/src/qt/test" class="" data-branch="master" data-pjax="true" itemscope="url"><span itemprop="title">test</span></a></span><span class="separator">/</span><strong class="final-path">paymentservertests.h</strong>
+    </div>
+  </div>
+
+<include-fragment class="commit-tease" src="/drivercoin/drivercoin/contributors/master/src/qt/test/paymentservertests.h">
+  <div>
+    Fetching contributors&hellip;
+  </div>
+
+  <div class="commit-tease-contributors">
+    <img alt="" class="loader-loading left" height="16" src="https://assets-cdn.github.com/images/spinners/octocat-spinner-32-EAF2F5.gif" width="16" />
+    <span class="loader-error">Cannot retrieve contributors at this time</span>
+  </div>
+</include-fragment>
+<div class="file">
+  <div class="file-header">
+  <div class="file-actions">
+
+    <div class="btn-group">
+      <a href="/drivercoin/drivercoin/raw/master/src/qt/test/paymentservertests.h" class="btn btn-sm " id="raw-url">Raw</a>
+        <a href="/drivercoin/drivercoin/blame/master/src/qt/test/paymentservertests.h" class="btn btn-sm js-update-url-with-hash">Blame</a>
+      <a href="/drivercoin/drivercoin/commits/master/src/qt/test/paymentservertests.h" class="btn btn-sm " rel="nofollow">History</a>
+    </div>
+
+
+        <button type="button" class="octicon-btn disabled tooltipped tooltipped-nw"
+          aria-label="You must be signed in to make or propose changes">
+          <span class="octicon octicon-pencil"></span>
+        </button>
+        <button type="button" class="octicon-btn octicon-btn-danger disabled tooltipped tooltipped-nw"
+          aria-label="You must be signed in to make or propose changes">
+          <span class="octicon octicon-trashcan"></span>
+        </button>
+  </div>
+
+  <div class="file-info">
+      36 lines (26 sloc)
+      <span class="file-info-divider"></span>
+    820 Bytes
+  </div>
+</div>
+
+  
+
+  <div class="blob-wrapper data type-c">
+      <table class="highlight tab-size js-file-line-container" data-tab-size="8">
+      <tr>
+        <td id="L1" class="blob-num js-line-number" data-line-number="1"></td>
+        <td id="LC1" class="blob-code blob-code-inner js-file-line"><span class="pl-c">// Copyright (c) 2009-2014 The Bitcoin Core developers</span></td>
+      </tr>
+      <tr>
+        <td id="L2" class="blob-num js-line-number" data-line-number="2"></td>
+        <td id="LC2" class="blob-code blob-code-inner js-file-line"><span class="pl-c">// Distributed under the MIT software license, see the accompanying</span></td>
+      </tr>
+      <tr>
+        <td id="L3" class="blob-num js-line-number" data-line-number="3"></td>
+        <td id="LC3" class="blob-code blob-code-inner js-file-line"><span class="pl-c">// file COPYING or http://www.opensource.org/licenses/mit-license.php.</span></td>
+      </tr>
+      <tr>
+        <td id="L4" class="blob-num js-line-number" data-line-number="4"></td>
+        <td id="LC4" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L5" class="blob-num js-line-number" data-line-number="5"></td>
+        <td id="LC5" class="blob-code blob-code-inner js-file-line">#<span class="pl-k">ifndef</span> BITCOIN_QT_TEST_PAYMENTSERVERTESTS_H</td>
+      </tr>
+      <tr>
+        <td id="L6" class="blob-num js-line-number" data-line-number="6"></td>
+        <td id="LC6" class="blob-code blob-code-inner js-file-line">#<span class="pl-k">define</span> <span class="pl-en">BITCOIN_QT_TEST_PAYMENTSERVERTESTS_H</span></td>
+      </tr>
+      <tr>
+        <td id="L7" class="blob-num js-line-number" data-line-number="7"></td>
+        <td id="LC7" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L8" class="blob-num js-line-number" data-line-number="8"></td>
+        <td id="LC8" class="blob-code blob-code-inner js-file-line">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&quot;</span>../paymentserver.h<span class="pl-pds">&quot;</span></span></td>
+      </tr>
+      <tr>
+        <td id="L9" class="blob-num js-line-number" data-line-number="9"></td>
+        <td id="LC9" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L10" class="blob-num js-line-number" data-line-number="10"></td>
+        <td id="LC10" class="blob-code blob-code-inner js-file-line">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>QObject<span class="pl-pds">&gt;</span></span></td>
+      </tr>
+      <tr>
+        <td id="L11" class="blob-num js-line-number" data-line-number="11"></td>
+        <td id="LC11" class="blob-code blob-code-inner js-file-line">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>QTest<span class="pl-pds">&gt;</span></span></td>
+      </tr>
+      <tr>
+        <td id="L12" class="blob-num js-line-number" data-line-number="12"></td>
+        <td id="LC12" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L13" class="blob-num js-line-number" data-line-number="13"></td>
+        <td id="LC13" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">PaymentServerTests</span> : <span class="pl-k">public</span> <span class="pl-en">QObject</span></td>
+      </tr>
+      <tr>
+        <td id="L14" class="blob-num js-line-number" data-line-number="14"></td>
+        <td id="LC14" class="blob-code blob-code-inner js-file-line">{</td>
+      </tr>
+      <tr>
+        <td id="L15" class="blob-num js-line-number" data-line-number="15"></td>
+        <td id="LC15" class="blob-code blob-code-inner js-file-line">    Q_OBJECT</td>
+      </tr>
+      <tr>
+        <td id="L16" class="blob-num js-line-number" data-line-number="16"></td>
+        <td id="LC16" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L17" class="blob-num js-line-number" data-line-number="17"></td>
+        <td id="LC17" class="blob-code blob-code-inner js-file-line">private Q_SLOTS:</td>
+      </tr>
+      <tr>
+        <td id="L18" class="blob-num js-line-number" data-line-number="18"></td>
+        <td id="LC18" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">void</span> <span class="pl-en">paymentServerTests</span>();</td>
+      </tr>
+      <tr>
+        <td id="L19" class="blob-num js-line-number" data-line-number="19"></td>
+        <td id="LC19" class="blob-code blob-code-inner js-file-line">};</td>
+      </tr>
+      <tr>
+        <td id="L20" class="blob-num js-line-number" data-line-number="20"></td>
+        <td id="LC20" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L21" class="blob-num js-line-number" data-line-number="21"></td>
+        <td id="LC21" class="blob-code blob-code-inner js-file-line"><span class="pl-c">// Dummy class to receive paymentserver signals.</span></td>
+      </tr>
+      <tr>
+        <td id="L22" class="blob-num js-line-number" data-line-number="22"></td>
+        <td id="LC22" class="blob-code blob-code-inner js-file-line"><span class="pl-c">// If SendCoinsRecipient was a proper QObject, then</span></td>
+      </tr>
+      <tr>
+        <td id="L23" class="blob-num js-line-number" data-line-number="23"></td>
+        <td id="LC23" class="blob-code blob-code-inner js-file-line"><span class="pl-c">// we could use QSignalSpy... but it&#39;s not.</span></td>
+      </tr>
+      <tr>
+        <td id="L24" class="blob-num js-line-number" data-line-number="24"></td>
+        <td id="LC24" class="blob-code blob-code-inner js-file-line"><span class="pl-k">class</span> <span class="pl-en">RecipientCatcher</span> : <span class="pl-k">public</span> <span class="pl-en">QObject</span></td>
+      </tr>
+      <tr>
+        <td id="L25" class="blob-num js-line-number" data-line-number="25"></td>
+        <td id="LC25" class="blob-code blob-code-inner js-file-line">{</td>
+      </tr>
+      <tr>
+        <td id="L26" class="blob-num js-line-number" data-line-number="26"></td>
+        <td id="LC26" class="blob-code blob-code-inner js-file-line">    Q_OBJECT</td>
+      </tr>
+      <tr>
+        <td id="L27" class="blob-num js-line-number" data-line-number="27"></td>
+        <td id="LC27" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L28" class="blob-num js-line-number" data-line-number="28"></td>
+        <td id="LC28" class="blob-code blob-code-inner js-file-line">public Q_SLOTS:</td>
+      </tr>
+      <tr>
+        <td id="L29" class="blob-num js-line-number" data-line-number="29"></td>
+        <td id="LC29" class="blob-code blob-code-inner js-file-line">    <span class="pl-k">void</span> <span class="pl-en">getRecipient</span>(SendCoinsRecipient r);</td>
+      </tr>
+      <tr>
+        <td id="L30" class="blob-num js-line-number" data-line-number="30"></td>
+        <td id="LC30" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L31" class="blob-num js-line-number" data-line-number="31"></td>
+        <td id="LC31" class="blob-code blob-code-inner js-file-line"><span class="pl-k">public:</span></td>
+      </tr>
+      <tr>
+        <td id="L32" class="blob-num js-line-number" data-line-number="32"></td>
+        <td id="LC32" class="blob-code blob-code-inner js-file-line">    SendCoinsRecipient recipient;</td>
+      </tr>
+      <tr>
+        <td id="L33" class="blob-num js-line-number" data-line-number="33"></td>
+        <td id="LC33" class="blob-code blob-code-inner js-file-line">};</td>
+      </tr>
+      <tr>
+        <td id="L34" class="blob-num js-line-number" data-line-number="34"></td>
+        <td id="LC34" class="blob-code blob-code-inner js-file-line">
+</td>
+      </tr>
+      <tr>
+        <td id="L35" class="blob-num js-line-number" data-line-number="35"></td>
+        <td id="LC35" class="blob-code blob-code-inner js-file-line">#<span class="pl-k">endif</span> <span class="pl-c">// BITCOIN_QT_TEST_PAYMENTSERVERTESTS_H</span></td>
+      </tr>
+</table>
+
+  </div>
+
+</div>
+
+<a href="#jump-to-line" rel="facebox[.linejump]" data-hotkey="l" style="display:none">Jump to Line</a>
+<div id="jump-to-line" style="display:none">
+  <!-- </textarea> --><!-- '"` --><form accept-charset="UTF-8" action="" class="js-jump-to-line-form" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+    <input class="linejump-input js-jump-to-line-field" type="text" placeholder="Jump to line&hellip;" aria-label="Jump to line" autofocus>
+    <button type="submit" class="btn">Go</button>
+</form></div>
+
+        </div>
+      </div>
+      <div class="modal-backdrop"></div>
+    </div>
+  </div>
+
+
+    </div>
+
+      <div class="container">
+  <div class="site-footer" role="contentinfo">
+    <ul class="site-footer-links right">
+        <li><a href="https://status.github.com/" data-ga-click="Footer, go to status, text:status">Status</a></li>
+      <li><a href="https://developer.github.com" data-ga-click="Footer, go to api, text:api">API</a></li>
+      <li><a href="https://training.github.com" data-ga-click="Footer, go to training, text:training">Training</a></li>
+      <li><a href="https://shop.github.com" data-ga-click="Footer, go to shop, text:shop">Shop</a></li>
+        <li><a href="https://github.com/blog" data-ga-click="Footer, go to blog, text:blog">Blog</a></li>
+        <li><a href="https://github.com/about" data-ga-click="Footer, go to about, text:about">About</a></li>
+        <li><a href="https://github.com/pricing" data-ga-click="Footer, go to pricing, text:pricing">Pricing</a></li>
+
+    </ul>
+
+    <a href="https://github.com" aria-label="Homepage">
+      <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+</a>
+    <ul class="site-footer-links">
+      <li>&copy; 2015 <span title="0.13180s from github-fe129-cp1-prd.iad.github.net">GitHub</span>, Inc.</li>
+        <li><a href="https://github.com/site/terms" data-ga-click="Footer, go to terms, text:terms">Terms</a></li>
+        <li><a href="https://github.com/site/privacy" data-ga-click="Footer, go to privacy, text:privacy">Privacy</a></li>
+        <li><a href="https://github.com/security" data-ga-click="Footer, go to security, text:security">Security</a></li>
+        <li><a href="https://github.com/contact" data-ga-click="Footer, go to contact, text:contact">Contact</a></li>
+        <li><a href="https://help.github.com" data-ga-click="Footer, go to help, text:help">Help</a></li>
+    </ul>
+  </div>
+</div>
+
+
+
+    
+    
+    
+
+    <div id="ajax-error-message" class="flash flash-error">
+      <span class="octicon octicon-alert"></span>
+      <button type="button" class="flash-close js-flash-close js-ajax-error-dismiss" aria-label="Dismiss error">
+        <span class="octicon octicon-x"></span>
+      </button>
+      Something went wrong with that request. Please try again.
+    </div>
+
+
+      <script crossorigin="anonymous" src="https://assets-cdn.github.com/assets/frameworks-080f1c155a28f5a4315d4a6862aeafb7e27bca0a74db6f7ae9e0048e321369d1.js"></script>
+      <script async="async" crossorigin="anonymous" src="https://assets-cdn.github.com/assets/github-ac033f0062bd3f47c468d3da839d615dff91cfcf0e416ea0a0099fbcd4483aba.js"></script>
+      
+      
+    <div class="js-stale-session-flash stale-session-flash flash flash-warn flash-banner hidden">
+      <span class="octicon octicon-alert"></span>
+      <span class="signed-in-tab-flash">You signed in with another tab or window. <a href="">Reload</a> to refresh your session.</span>
+      <span class="signed-out-tab-flash">You signed out in another tab or window. <a href="">Reload</a> to refresh your session.</span>
+    </div>
+  </body>
+</html>
+

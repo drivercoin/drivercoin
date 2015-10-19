@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-# Copyright (c) 2014 The Bitcoin Core developers
+# Copyright (c) 2014 The Drivercoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -7,7 +7,7 @@
 # Test rpc http basics
 #
 
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import DrivercoinTestFramework
 from test_framework.util import *
 import base64
 
@@ -20,7 +20,7 @@ try:
 except ImportError:
     import urlparse
 
-class HTTPBasicsTest (BitcoinTestFramework):
+class HTTPBasicsTest (DrivercoinTestFramework):
     def setup_nodes(self):
         return start_nodes(4, self.options.tmpdir)
 
@@ -95,7 +95,7 @@ class HTTPBasicsTest (BitcoinTestFramework):
         conn.request('POST', '/', '{"method": "getbestblockhash"}', headers)
         out1 = conn.getresponse().read();
         assert_equal('"error":null' in out1, True)
-        assert_equal(conn.sock!=None, True) #connection must be closed because bitcoind should use keep-alive by default
+        assert_equal(conn.sock!=None, True) #connection must be closed because drivercoind should use keep-alive by default
 
 if __name__ == '__main__':
     HTTPBasicsTest ().main ()

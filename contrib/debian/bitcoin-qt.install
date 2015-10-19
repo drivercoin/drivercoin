@@ -1,6 +1,6 @@
-usr/local/bin/bitcoin-qt usr/bin
-share/pixmaps/bitcoin32.xpm usr/share/pixmaps
-share/pixmaps/bitcoin16.xpm usr/share/pixmaps
-share/pixmaps/bitcoin128.png usr/share/pixmaps
-debian/bitcoin-qt.desktop usr/share/applications
-debian/bitcoin-qt.protocol usr/share/kde4/services/
+usr/local/bin/drivercoin-qt usr/bin
+share/pixmaps/drivercoin32.xpm usr/share/pixmaps
+share/pixmaps/drivercoin16.xpm usr/share/pixmaps
+share/pixmaps/drivercoin128.png usr/share/pixmaps
+debian/drivercoin-qt.desktop usr/share/applications
+debian/drivercoin-qt.protocol usr/share/kde4/services/
