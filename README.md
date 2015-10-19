@@ -1,42 +1,42 @@
-Bitcoin Core integration/staging tree
+Drivercoin Core integration/staging tree
 =====================================
 
-[![Build Status](https://travis-ci.org/bitcoin/bitcoin.svg?branch=master)](https://travis-ci.org/bitcoin/bitcoin)
+[![Build Status](https://travis-ci.org/drivercoin/drivercoin.svg?branch=master)](https://travis-ci.org/drivercoin/drivercoin)
 
-https://www.bitcoin.org
+https://www.drivercoin.org
 
-What is Bitcoin?
+What is Drivercoin?
 ----------------
 
-Bitcoin is an experimental new digital currency that enables instant payments to
-anyone, anywhere in the world. Bitcoin uses peer-to-peer technology to operate
+Drivercoin is an experimental new digital currency that enables instant payments to
+anyone, anywhere in the world. Drivercoin uses peer-to-peer technology to operate
 with no central authority: managing transactions and issuing money are carried
-out collectively by the network. Bitcoin Core is the name of open source
+out collectively by the network. Drivercoin Core is the name of open source
 software which enables the use of this currency.
 
 For more information, as well as an immediately useable, binary version of
-the Bitcoin Core software, see https://www.bitcoin.org/en/download.
+the Drivercoin Core software, see https://www.drivercoin.org/en/download.
 
 License
 -------
 
-Bitcoin Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
+Drivercoin Core is released under the terms of the MIT license. See [COPYING](COPYING) for more
 information or see http://opensource.org/licenses/MIT.
 
 Development Process
 -------------------
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/bitcoin/bitcoin/tags) are created
-regularly to indicate new official, stable release versions of Bitcoin Core.
+completely stable. [Tags](https://github.com/drivercoin/drivercoin/tags) are created
+regularly to indicate new official, stable release versions of Drivercoin Core.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-The developer [mailing list](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev)
+The developer [mailing list](https://lists.linuxfoundation.org/mailman/listinfo/drivercoin-dev)
 should be used to discuss complicated or controversial changes before working
 on a patch set.
 
-Developer IRC can be found on Freenode at #bitcoin-core-dev.
+Developer IRC can be found on Freenode at #drivercoin-core-dev.
 
 Testing
 -------
@@ -58,20 +58,20 @@ These tests can be run with: `qa/pull-tester/rpc-tests.py`
 Every pull request is built for both Windows and Linux on a dedicated server,
 and unit and sanity tests are automatically run. The binaries produced may be
 used for manual QA testing — a link to them will appear in a comment on the
-pull request posted by [BitcoinPullTester](https://github.com/BitcoinPullTester). See https://github.com/TheBlueMatt/test-scripts
+pull request posted by [DrivercoinPullTester](https://github.com/DrivercoinPullTester). See https://github.com/TheBlueMatt/test-scripts
 for the build/test scripts.
 
 ### Manual Quality Assurance (QA) Testing
 
 Large changes should have a test plan, and should be tested by somebody other
 than the developer who wrote the code.
-See https://github.com/bitcoin/QA/ for how to create a test plan.
+See https://github.com/drivercoin/QA/ for how to create a test plan.
 
 Translations
 ------------
 
 Changes to translations as well as new translations can be submitted to
-[Bitcoin Core's Transifex page](https://www.transifex.com/projects/p/bitcoin/).
+[Drivercoin Core's Transifex page](https://www.transifex.com/projects/p/drivercoin/).
 
 Translations are periodically pulled from Transifex and merged into the git repository. See the
 [translation process](doc/translation_process.md) for details on how this works.
@@ -79,4 +79,4 @@ Translations are periodically pulled from Transifex and merged into the git repo
 **Important**: We do not accept translation changes as GitHub pull requests because the next
 pull from Transifex would automatically overwrite them again.
 
-Translators should also subscribe to the [mailing list](https://groups.google.com/forum/#!forum/bitcoin-translators).
+Translators should also subscribe to the [mailing list](https://groups.google.com/forum/#!forum/drivercoin-translators).
